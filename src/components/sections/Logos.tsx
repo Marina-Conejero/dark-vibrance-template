@@ -23,7 +23,7 @@ type Logo = {
 
 export function Logos() {
   // Define the initial state with real logos and placeholders
-  const initialLogos = [
+  const initialLogos: Logo[] = [
     // Real logos with appropriate styling
     {
       id: 1,
@@ -43,10 +43,10 @@ export function Logos() {
       alt: "CalibrateHCM",
       isPlaceholder: false
     },
-    // Placeholder logos
-    { id: 4, alt: "LOGO 4", isPlaceholder: true },
-    { id: 5, alt: "LOGO 5", isPlaceholder: true },
-    { id: 6, alt: "LOGO 6", isPlaceholder: true }
+    // Placeholder logos (with empty string for src)
+    { id: 4, src: "", alt: "LOGO 4", isPlaceholder: true },
+    { id: 5, src: "", alt: "LOGO 5", isPlaceholder: true },
+    { id: 6, src: "", alt: "LOGO 6", isPlaceholder: true }
   ];
 
   const [logos, setLogos] = useState<Logo[]>(initialLogos);
