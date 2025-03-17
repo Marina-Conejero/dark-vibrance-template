@@ -1,3 +1,4 @@
+
 import { Button } from "../ui/CustomButton";
 export function Footer() {
   return <footer className="bg-brand-darker pt-16 pb-8">
@@ -26,7 +27,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <a href="https://www.linkedin.com/company/hive-mechanics/jobs/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                   Careers
                 </a>
               </li>
