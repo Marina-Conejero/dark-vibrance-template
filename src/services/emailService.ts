@@ -15,10 +15,26 @@ export const sendContactEmail = async (formData: {
   company: string;
   message: string;
 }) => {
+  const { name, email, company, message } = formData;
+  let slackSuccess = false;
+  let emailSuccess = false;
+  
+  // First, try sending to Slack as it's non-critical
+  if (isSlackConfigured()) {
+    try {
+      console.log('Attempting to send to Slack...');
+      await sendToSlack(formData);
+      slackSuccess = true;
+      console.log('Successfully sent to Slack');
+    } catch (slackError) {
+      console.error('Error sending to Slack, continuing with email:', slackError);
+      // Don't block email sending if Slack fails
+    }
+  }
+  
+  // Then send email via Resend
   try {
-    const { name, email, company, message } = formData;
-    
-    // Send email via Resend
+    console.log('Sending email via Resend...');
     const emailResponse = await resendInstance.emails.send({
       from: 'onboarding@resend.dev', // Use verified sender or domain in Resend
       to: 'marina@hivemechanics.io', // Replace with your email
@@ -33,15 +49,9 @@ export const sendContactEmail = async (formData: {
       `,
     });
     
-    // Always send to Slack as well since it's now configured by default
-    try {
-      await sendToSlack(formData);
-    } catch (slackError) {
-      console.error('Error sending to Slack:', slackError);
-      // Don't throw here, as we still sent the email successfully
-    }
-
-    return emailResponse;
+    emailSuccess = true;
+    console.log('Email sent successfully:', emailResponse);
+    return { emailSuccess, slackSuccess, emailResponse };
   } catch (error) {
     console.error('Error sending email:', error);
     throw error;
