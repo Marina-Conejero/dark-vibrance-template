@@ -33,14 +33,14 @@ export function Process() {
   ];
 
   return (
-    <Section id="process">
+    <Section id="process" className="py-24">
       <SectionTitle
         subtitle="Our Process"
         title="How We Support Our Partners"
         description="Our proven methodology delivers quick wins while building toward long-term strategic goals."
       />
       
-      <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+      <div className="mt-16 grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-6">
         {steps.map((step, index) => (
           <ProcessStep
             key={index}
@@ -48,13 +48,14 @@ export function Process() {
             step={step.step}
             title={step.title}
             description={step.description}
-            className="animate-fade-in-up"
+            isLast={index === steps.length - 1}
+            className="animate-fade-in-up pb-12 relative"
             style={{ animationDelay: `${index * 0.1}s` }}
           />
         ))}
       </div>
       
-      <div className="mt-16 text-center">
+      <div className="mt-20 text-center">
         <Button variant="primary" size="lg" hasArrow useCalendar>
           Start Your Journey
         </Button>

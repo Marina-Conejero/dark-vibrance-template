@@ -1,5 +1,6 @@
 
 import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
 
 interface ProcessStepProps {
   icon: React.ReactNode;
@@ -8,37 +9,37 @@ interface ProcessStepProps {
   description: string;
   className?: string;
   style?: React.CSSProperties;
+  isLast?: boolean;
 }
 
-export function ProcessStep({ icon, step, title, description, className, style }: ProcessStepProps) {
-  // Updated to use consistent brand-blue color for all steps
-  const getStepColor = () => {
-    return "bg-brand-blue text-white";
-  };
-
+export function ProcessStep({ icon, step, title, description, className, style, isLast = false }: ProcessStepProps) {
   return (
     <div className={cn("relative flex flex-col items-start", className)} style={style}>
-      <div className={cn(
-        "flex h-16 w-16 items-center justify-center rounded-full mb-6",
-        getStepColor()
-      )}>
+      {/* Step Circle with Icon */}
+      <div className="flex h-16 w-16 items-center justify-center rounded-full mb-4 bg-brand-blue text-white mx-auto">
         {icon}
       </div>
       
-      <div className="flex items-center mb-3">
-        <span className="text-sm font-medium text-gray-400 mr-2">Step {step}</span>
+      {/* Step Number and Title */}
+      <div className="flex flex-col items-center mb-3 w-full">
+        <span className="text-sm font-medium text-gray-400 mb-1">Step {step}</span>
         <h3 className="text-xl font-semibold">{title}</h3>
       </div>
       
-      <p className="text-gray-300">{description}</p>
+      {/* Description */}
+      <p className="text-gray-300 text-center">{description}</p>
       
-      {step < 4 && (
-        <div className="hidden md:block absolute -right-6 top-8 transform rotate-90 md:rotate-0">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+      {/* Vertical separator line (not shown for the last step) */}
+      {!isLast && (
+        <div className="hidden lg:block absolute top-8 -right-6 h-full">
+          <div className="h-full border-r border-gray-700 mx-auto" style={{ height: "calc(100% - 3rem)" }}></div>
         </div>
       )}
+      
+      {/* Arrow at the bottom of each step */}
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mt-4">
+        <ArrowRight className="h-6 w-6 text-gray-400" />
+      </div>
     </div>
   );
 }
