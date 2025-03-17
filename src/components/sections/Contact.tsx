@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,14 +9,8 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/CustomButton";
 import { toast } from "../../hooks/use-toast";
-import { Send, CheckCircle, Key, Trash2 } from "lucide-react";
-import { 
-  isResendConfigured, 
-  sendContactEmail, 
-  setResendApiKey, 
-  initializeResendFromStorage,
-  clearResendApiKey
-} from "@/services/emailService";
+import { Send, CheckCircle } from "lucide-react";
+import { sendContactEmail } from "@/services/emailService";
 
 // Schema for form validation
 const contactFormSchema = z.object({
@@ -39,7 +33,6 @@ const defaultValues: Partial<ContactFormValues> = {
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [isResendSet, setIsResendSet] = useState(false);
   
   // Initialize form with zod resolver
   const form = useForm<ContactFormValues>({
@@ -47,57 +40,11 @@ export function Contact() {
     defaultValues,
   });
 
-  // Check for stored API key on component mount
-  useEffect(() => {
-    const isInitialized = initializeResendFromStorage();
-    setIsResendSet(isInitialized);
-  }, []);
-  
-  // Handle setting the Resend API key
-  const handleSetApiKey = async () => {
-    const apiKey = prompt("Please enter your Resend API key (it will be stored securely in your browser):");
-    if (!apiKey) return;
-    
-    try {
-      const success = setResendApiKey(apiKey);
-      if (success) {
-        setIsResendSet(true);
-        toast({
-          title: "API Key Set Successfully",
-          description: "Your Resend API key has been securely stored.",
-        });
-      }
-    } catch (error) {
-      console.error("Error setting API key:", error);
-      toast({
-        title: "Error Setting API Key",
-        description: "Please try again with a valid Resend API key.",
-        variant: "destructive",
-      });
-    }
-  };
-  
-  // Handle removing the Resend API key
-  const handleRemoveApiKey = () => {
-    if (confirm("Are you sure you want to remove your Resend API key?")) {
-      clearResendApiKey();
-      setIsResendSet(false);
-      toast({
-        title: "API Key Removed",
-        description: "Your Resend API key has been removed from storage.",
-      });
-    }
-  };
-
   // Handle form submission
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
     
     try {
-      if (!isResendSet) {
-        throw new Error("Resend API key not set");
-      }
-      
       await sendContactEmail({
         name: data.name,
         email: data.email,
@@ -120,19 +67,11 @@ export function Contact() {
     } catch (error) {
       console.error("Error sending message:", error);
       
-      if (!isResendSet) {
-        toast({
-          title: "Resend API key not set",
-          description: "Please set your Resend API key first.",
-          variant: "destructive",
-        });
-      } else {
-        toast({
-          title: "Error sending message",
-          description: "Please try again later or contact us directly.",
-          variant: "destructive",
-        });
-      }
+      toast({
+        title: "Error sending message",
+        description: "Please try again later or contact us directly.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -154,26 +93,6 @@ export function Contact() {
       />
       
       <div className="mx-auto max-w-3xl relative z-10">
-        <div className="flex justify-center mb-4">
-          {!isResendSet ? (
-            <Button onClick={handleSetApiKey} variant="outline" className="mb-4 text-sm">
-              <Key className="mr-2 h-4 w-4" />
-              Set Resend API Key
-            </Button>
-          ) : (
-            <div className="flex gap-2 mb-4">
-              <Button variant="outline" className="text-sm text-green-500 pointer-events-none">
-                <CheckCircle className="mr-2 h-4 w-4" />
-                Resend API Key Configured
-              </Button>
-              <Button onClick={handleRemoveApiKey} variant="outline" className="text-sm text-red-500">
-                <Trash2 className="mr-2 h-4 w-4" />
-                Remove API Key
-              </Button>
-            </div>
-          )}
-        </div>
-        
         <div className="glass rounded-xl p-6 md:p-8 animate-fade-in-up">
           {isSuccess ? (
             <div className="flex flex-col items-center justify-center py-12 text-center">
@@ -259,7 +178,6 @@ export function Contact() {
                     size="lg" 
                     isLoading={isSubmitting}
                     className="w-full md:w-auto"
-                    disabled={!isResendSet}
                   >
                     <Send className="mr-2 h-4 w-4" />
                     Send Message

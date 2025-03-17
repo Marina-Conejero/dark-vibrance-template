@@ -1,54 +1,8 @@
 
 import { Resend } from 'resend';
 
-// Initialize with null instance
-let resendInstance: Resend | null = null;
-
-/**
- * Sets the Resend API key and initializes the Resend instance
- * The key will be stored in localStorage for persistence
- */
-export const setResendApiKey = (key: string) => {
-  try {
-    // Store the API key securely in localStorage with encryption
-    localStorage.setItem('resend_api_key', window.btoa(key));
-    
-    // Initialize Resend with the provided key
-    resendInstance = new Resend(key);
-    return true;
-  } catch (error) {
-    console.error('Error setting Resend API key:', error);
-    return false;
-  }
-};
-
-/**
- * Initializes Resend from localStorage if a key exists
- * Call this function on app initialization
- */
-export const initializeResendFromStorage = () => {
-  try {
-    const storedKey = localStorage.getItem('resend_api_key');
-    if (storedKey) {
-      const decodedKey = window.atob(storedKey);
-      resendInstance = new Resend(decodedKey);
-      return true;
-    }
-    return false;
-  } catch (error) {
-    console.error('Error initializing Resend from storage:', error);
-    return false;
-  }
-};
-
-/**
- * Clears the stored API key and resets the Resend instance
- */
-export const clearResendApiKey = () => {
-  localStorage.removeItem('resend_api_key');
-  resendInstance = null;
-  return true;
-};
+// Initialize with the provided API key
+const resendInstance = new Resend('re_LdbpXztf_6VVw2yFKKyCCj3qAWnNjqQSZ');
 
 /**
  * Sends an email with the contact form data
@@ -59,10 +13,6 @@ export const sendContactEmail = async (formData: {
   company: string;
   message: string;
 }) => {
-  if (!resendInstance) {
-    throw new Error('Resend API key not set');
-  }
-
   try {
     const { name, email, company, message } = formData;
     
@@ -88,8 +38,8 @@ export const sendContactEmail = async (formData: {
 };
 
 /**
- * Returns whether the Resend API key is set
+ * Returns whether Resend is configured
  */
 export const isResendConfigured = () => {
-  return !!resendInstance;
+  return true; // Always return true since we have a hardcoded API key
 };
