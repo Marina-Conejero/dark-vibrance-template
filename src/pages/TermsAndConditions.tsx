@@ -4,10 +4,11 @@ import { Section } from "@/components/ui/Section";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const TermsAndConditions = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const sectionRefs = {
     introduction: useRef<HTMLDivElement>(null),
     services: useRef<HTMLDivElement>(null),
@@ -40,8 +41,12 @@ const TermsAndConditions = () => {
   const createSectionLink = (sectionId: string, text: string) => {
     return (
       <a 
-        href={`#${sectionId}`} 
+        href="/"
         className="text-brand-purple hover:text-brand-blue transition-colors"
+        onClick={(e) => {
+          e.preventDefault();
+          navigate('/');
+        }}
       >
         {text}
       </a>
