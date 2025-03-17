@@ -1,40 +1,35 @@
 
 import { Section, SectionTitle } from "../ui/Section";
-import { Fragment } from "react";
 
 export function Logos() {
-  // Using actual client logos for first two, placeholder SVGs for the rest
+  // All logos with transparent backgrounds and white text
   const logos = [
-    // Mindspace logo
+    // Mindspace logo (already has appropriate styling)
     <img 
       key="1" 
       src="/lovable-uploads/6ab5cd4b-8184-4d99-bb45-8bff186cdc32.png" 
       alt="Mindspace" 
-      className="h-10 md:h-12 w-auto"
+      className="h-10 md:h-12 w-auto object-contain"
     />,
-    // Sama logo
+    // Sama logo (already has appropriate styling)
     <img 
       key="2" 
       src="/lovable-uploads/e2212927-4fa0-4ee6-abdd-e8419d81daaa.png" 
       alt="Sama" 
-      className="h-10 md:h-12 w-auto"
+      className="h-10 md:h-12 w-auto object-contain"
     />,
-    // Remaining placeholder logos
-    <svg key="3" viewBox="0 0 100 50" className="h-8 md:h-10 w-auto">
-      <rect width="80" height="30" x="10" y="10" fill="#333" rx="5" />
-      <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle">LOGO 3</text>
+    // Remaining placeholder logos with white text on transparent background
+    <svg key="3" viewBox="0 0 100 50" className="h-10 md:h-12 w-auto">
+      <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle" fontWeight="bold">LOGO 3</text>
     </svg>,
-    <svg key="4" viewBox="0 0 100 50" className="h-8 md:h-10 w-auto">
-      <rect width="80" height="30" x="10" y="10" fill="#333" rx="5" />
-      <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle">LOGO 4</text>
+    <svg key="4" viewBox="0 0 100 50" className="h-10 md:h-12 w-auto">
+      <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle" fontWeight="bold">LOGO 4</text>
     </svg>,
-    <svg key="5" viewBox="0 0 100 50" className="h-8 md:h-10 w-auto">
-      <rect width="80" height="30" x="10" y="10" fill="#333" rx="5" />
-      <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle">LOGO 5</text>
+    <svg key="5" viewBox="0 0 100 50" className="h-10 md:h-12 w-auto">
+      <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle" fontWeight="bold">LOGO 5</text>
     </svg>,
-    <svg key="6" viewBox="0 0 100 50" className="h-8 md:h-10 w-auto">
-      <rect width="80" height="30" x="10" y="10" fill="#333" rx="5" />
-      <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle">LOGO 6</text>
+    <svg key="6" viewBox="0 0 100 50" className="h-10 md:h-12 w-auto">
+      <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle" fontWeight="bold">LOGO 6</text>
     </svg>,
   ];
 
@@ -50,7 +45,7 @@ export function Logos() {
         {logos.map((logo, index) => (
           <div 
             key={index} 
-            className="grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            className="grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300 flex items-center justify-center h-16"
           >
             {logo}
           </div>
