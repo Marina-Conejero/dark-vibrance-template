@@ -16,23 +16,23 @@ export function ProcessStep({ icon, step, title, description, className, style, 
   return (
     <div className={cn("relative flex flex-col items-start", className)} style={style}>
       {/* Step Circle with Icon */}
-      <div className="flex h-16 w-16 items-center justify-center rounded-full mb-4 bg-brand-blue text-white mx-auto">
+      <div className="flex h-16 w-16 items-center justify-center rounded-full mb-4 bg-brand-blue text-white">
         {icon}
       </div>
       
       {/* Step Number and Title */}
-      <div className="flex flex-col items-center mb-3 w-full">
+      <div className="flex flex-col items-start mb-3 w-full">
         <span className="text-sm font-medium text-gray-400 mb-1">Step {step}</span>
         <h3 className="text-xl font-semibold">{title}</h3>
       </div>
       
       {/* Description */}
-      <p className="text-gray-300 text-center">{description}</p>
+      <p className="text-gray-300 text-left pr-8">{description}</p>
       
       {/* Vertical separator line (not shown for the last step) */}
       {!isLast && (
-        <div className="hidden lg:block absolute top-8 -right-6 h-full">
-          <div className="h-full border-r border-gray-700 mx-auto" style={{ height: "calc(100% - 3rem)" }}></div>
+        <div className="hidden lg:block absolute top-8 right-0 h-full mx-6">
+          <div className="h-full border-r border-gray-700" style={{ height: "calc(100% - 3rem)" }}></div>
         </div>
       )}
       

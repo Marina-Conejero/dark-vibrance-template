@@ -40,7 +40,7 @@ export function Process() {
         description="Our proven methodology delivers quick wins while building toward long-term strategic goals."
       />
       
-      <div className="mt-16 grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-6">
+      <div className="mt-16 grid grid-cols-1 lg:grid-cols-4 gap-x-0 gap-y-12">
         {steps.map((step, index) => (
           <ProcessStep
             key={index}
@@ -49,7 +49,7 @@ export function Process() {
             title={step.title}
             description={step.description}
             isLast={index === steps.length - 1}
-            className="animate-fade-in-up pb-12 relative"
+            className="animate-fade-in-up pb-12 relative px-4"
             style={{ animationDelay: `${index * 0.1}s` }}
           />
         ))}
