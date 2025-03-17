@@ -136,12 +136,6 @@ export function Logos() {
           </Dialog>
         ))}
       </div>
-      
-      <div className="mt-8 text-center text-sm text-gray-400">
-        <p>Click on any logo to upload or replace it</p>
-        <p>Recommended size: 400px × 200px (2:1 ratio)</p>
-        <p>Format: PNG with transparent background</p>
-      </div>
     </Section>
   );
 }
