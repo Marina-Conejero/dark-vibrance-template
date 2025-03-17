@@ -3,7 +3,7 @@ export function Logos() {
   // All logos with transparent backgrounds and white text
   const logos = [
   // Mindspace logo (already has appropriate styling)
-  <img key="1" alt="Mindspace" className="h-14 md:h-20 w-auto object-contain" src="/lovable-uploads/1af19905-9e52-4399-973f-0a16de9dd56f.png" />,
+  <img key="1" alt="Mindspace" className="h-14 md:h-20 w-auto object-contain" src="/lovable-uploads/a6ea8c7b-03c0-4968-bcdd-359d251b751e.png" />,
   // Sama logo (already has appropriate styling)
   <img key="2" src="/lovable-uploads/e2212927-4fa0-4ee6-abdd-e8419d81daaa.png" alt="Sama" className="h-14 md:h-20 w-auto object-contain" />,
   // Remaining placeholder logos with white text on transparent background
