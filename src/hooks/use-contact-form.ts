@@ -54,7 +54,8 @@ export function useContactForm() {
       });
       
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Network response was not ok');
       }
       
       const result = await response.json();
@@ -71,7 +72,6 @@ export function useContactForm() {
         
         // Show success state
         setIsSuccess(true);
-        setTimeout(() => setIsSuccess(false), 3000);
       } else {
         // Show error message
         toast({
@@ -84,7 +84,7 @@ export function useContactForm() {
       console.error("Error sending message:", error);
       toast({
         title: "An unexpected error occurred",
-        description: "Please try again later or contact us directly.",
+        description: error instanceof Error ? error.message : "Please try again later or contact us directly.",
         variant: "destructive",
       });
     } finally {
