@@ -25,6 +25,9 @@ const TermsAndConditions = () => {
   };
   
   useEffect(() => {
+    // Scroll to top when directly navigating to the page
+    window.scrollTo(0, 0);
+    
     // Check if there's a hash in the URL
     if (location.hash) {
       const sectionId = location.hash.substring(1);
