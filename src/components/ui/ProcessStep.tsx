@@ -11,26 +11,16 @@ interface ProcessStepProps {
 }
 
 export function ProcessStep({ icon, step, title, description, className, style }: ProcessStepProps) {
-  const getStepColor = (step: number) => {
-    switch (step) {
-      case 1:
-        return "bg-brand-purple text-white";
-      case 2:
-        return "bg-brand-blue text-white";
-      case 3:
-        return "bg-blue-500 text-white";
-      case 4:
-        return "bg-brand-yellow text-black";
-      default:
-        return "bg-brand-purple text-white";
-    }
+  // Updated to use consistent brand-blue color for all steps
+  const getStepColor = () => {
+    return "bg-brand-blue text-white";
   };
 
   return (
     <div className={cn("relative flex flex-col items-start", className)} style={style}>
       <div className={cn(
         "flex h-16 w-16 items-center justify-center rounded-full mb-6",
-        getStepColor(step)
+        getStepColor()
       )}>
         {icon}
       </div>
