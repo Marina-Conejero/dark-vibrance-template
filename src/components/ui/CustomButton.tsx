@@ -33,7 +33,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const calAttributes = useCalendar && variant === "primary" ? {
       "data-cal-link": "team/hive-mechanics/free-consultation",
       "data-cal-namespace": "free-consultation",
-      "data-cal-config": '{"layout":"month_view"}'
+      "data-cal-config": '{"layout":"month_view","theme":"dark"}'
     } : {};
 
     return (
