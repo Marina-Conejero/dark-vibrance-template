@@ -1,5 +1,4 @@
-
-import { Button } from "../ui/Button";
+import { Button } from "../ui/CustomButton";
 
 export function Hero() {
   return (

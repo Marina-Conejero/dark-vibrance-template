@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Button } from "../ui/Button";
+import { Button } from "../ui/CustomButton";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 
