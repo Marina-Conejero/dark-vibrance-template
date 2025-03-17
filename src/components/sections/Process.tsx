@@ -37,7 +37,7 @@ export function Process() {
       <SectionTitle
         subtitle="Our Process"
         title="How We Support Our Partners"
-        description="Our proven methodology delivers quick wins while building toward long-term strategic goals."
+        description="Through proven implementation examples and a rapid discovery process, we help our partners uncover and leverage key AI and automation opportunities"
       />
       
       <div className="mt-16 grid grid-cols-1 lg:grid-cols-4 gap-x-0 gap-y-12">
