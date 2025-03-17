@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -44,28 +43,28 @@ export function Contact() {
     setIsSubmitting(true);
     
     try {
-      // Create form data for PHP submission
-      const formData = new FormData();
-      formData.append('name', data.name);
-      formData.append('email', data.email);
-      formData.append('company', data.company || 'Not provided');
-      formData.append('message', data.message);
-      
-      // Send the form data to the PHP script
-      const response = await fetch('/contact.php', {
+      // Create API request to send email using Resend
+      const response = await fetch('/api/send-email', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          company: data.company,
+          message: data.message,
+          recipient: 'marina@hivemechanics.io'
+        }),
       });
       
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       
-      // Get the response text from the PHP script
-      const result = await response.text();
+      const result = await response.json();
       
-      // Check the response from the PHP script
-      if (result.includes('success')) {
+      if (result.success) {
         // Show success message
         toast({
           title: "Message sent successfully!",
@@ -78,18 +77,12 @@ export function Contact() {
         // Show success state
         setIsSuccess(true);
         setTimeout(() => setIsSuccess(false), 3000);
-      } else if (result.includes('error')) {
+      } else {
         // Show error message
         toast({
           title: "Message failed to send",
-          description: "Please try again later.",
+          description: result.error || "Please try again later.",
           variant: "destructive",
-        });
-      } else {
-        // Show generic message for other responses
-        toast({
-          title: "Response received",
-          description: result,
         });
       }
     } catch (error) {
