@@ -1,18 +1,25 @@
 
 import { Section, SectionTitle } from "../ui/Section";
+import { Fragment } from "react";
 
 export function Logos() {
-  // Placeholder logo SVGs - these would be replaced with actual client logos
+  // Using actual client logos for first two, placeholder SVGs for the rest
   const logos = [
-    // Simplified placeholder logos
-    <svg key="1" viewBox="0 0 100 50" className="h-8 md:h-10 w-auto">
-      <rect width="80" height="30" x="10" y="10" fill="#333" rx="5" />
-      <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle">LOGO 1</text>
-    </svg>,
-    <svg key="2" viewBox="0 0 100 50" className="h-8 md:h-10 w-auto">
-      <rect width="80" height="30" x="10" y="10" fill="#333" rx="5" />
-      <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle">LOGO 2</text>
-    </svg>,
+    // Mindspace logo
+    <img 
+      key="1" 
+      src="/lovable-uploads/6ab5cd4b-8184-4d99-bb45-8bff186cdc32.png" 
+      alt="Mindspace" 
+      className="h-10 md:h-12 w-auto"
+    />,
+    // Sama logo
+    <img 
+      key="2" 
+      src="/lovable-uploads/e2212927-4fa0-4ee6-abdd-e8419d81daaa.png" 
+      alt="Sama" 
+      className="h-10 md:h-12 w-auto"
+    />,
+    // Remaining placeholder logos
     <svg key="3" viewBox="0 0 100 50" className="h-8 md:h-10 w-auto">
       <rect width="80" height="30" x="10" y="10" fill="#333" rx="5" />
       <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle">LOGO 3</text>
