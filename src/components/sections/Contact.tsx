@@ -10,7 +10,6 @@ import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/CustomButton";
 import { toast } from "../../hooks/use-toast";
 import { Send, CheckCircle } from "lucide-react";
-import emailjs from 'emailjs-com';
 
 // Schema for form validation
 const contactFormSchema = z.object({
@@ -30,11 +29,6 @@ const defaultValues: Partial<ContactFormValues> = {
   message: "",
 };
 
-// EmailJS configuration
-const EMAILJS_SERVICE_ID = "default_service"; // You'll need to replace this with your EmailJS service ID
-const EMAILJS_TEMPLATE_ID = "template_contact"; // You'll need to replace this with your EmailJS template ID
-const EMAILJS_USER_ID = "YOUR_USER_ID"; // You'll need to replace this with your EmailJS user ID
-
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -50,23 +44,24 @@ export function Contact() {
     setIsSubmitting(true);
     
     try {
-      // Prepare the template parameters for EmailJS
-      const templateParams = {
-        to_email: "marina@hivemechanics.io",
-        from_name: data.name,
-        from_email: data.email,
-        company: data.company || 'Not provided',
-        message: data.message,
-        subject: "New Contact Form Submission"
-      };
+      // Create form data for PHP submission
+      const formData = new FormData();
+      formData.append('name', data.name);
+      formData.append('email', data.email);
+      formData.append('company', data.company || 'Not provided');
+      formData.append('message', data.message);
       
-      // Send the email using EmailJS
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_USER_ID
-      );
+      // Send the form data to the PHP script
+      const response = await fetch('/contact.php', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      if (!response.ok) {
+        throw new Error('Server responded with an error');
+      }
+      
+      const result = await response.text();
       
       // Show success message
       toast({
