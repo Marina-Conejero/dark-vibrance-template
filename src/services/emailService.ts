@@ -1,11 +1,13 @@
 
 import { Resend } from 'resend';
+import { sendToSlack, isSlackConfigured } from './slackService';
 
 // Initialize with the provided API key
 const resendInstance = new Resend('re_LdbpXztf_6VVw2yFKKyCCj3qAWnNjqQSZ');
 
 /**
  * Sends an email with the contact form data
+ * If Slack is configured, also sends to Slack
  */
 export const sendContactEmail = async (formData: {
   name: string;
@@ -16,7 +18,8 @@ export const sendContactEmail = async (formData: {
   try {
     const { name, email, company, message } = formData;
     
-    const response = await resendInstance.emails.send({
+    // Send email via Resend
+    const emailResponse = await resendInstance.emails.send({
       from: 'onboarding@resend.dev', // Use verified sender or domain in Resend
       to: 'marina@hivemechanics.io', // Replace with your email
       subject: `New Contact Form Submission from ${name}`,
@@ -29,8 +32,18 @@ export const sendContactEmail = async (formData: {
         <p>${message.replace(/\n/g, '<br>')}</p>
       `,
     });
+    
+    // If Slack is configured, send to Slack as well
+    if (isSlackConfigured()) {
+      try {
+        await sendToSlack(formData);
+      } catch (slackError) {
+        console.error('Error sending to Slack:', slackError);
+        // Don't throw here, as we still sent the email successfully
+      }
+    }
 
-    return response;
+    return emailResponse;
   } catch (error) {
     console.error('Error sending email:', error);
     throw error;
