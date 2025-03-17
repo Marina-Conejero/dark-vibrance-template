@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,8 +9,14 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/CustomButton";
 import { toast } from "../../hooks/use-toast";
-import { Send, CheckCircle, Key } from "lucide-react";
-import { isResendConfigured, sendContactEmail, setResendApiKey } from "@/services/emailService";
+import { Send, CheckCircle, Key, Trash2 } from "lucide-react";
+import { 
+  isResendConfigured, 
+  sendContactEmail, 
+  setResendApiKey, 
+  initializeResendFromStorage,
+  clearResendApiKey
+} from "@/services/emailService";
 
 // Schema for form validation
 const contactFormSchema = z.object({
@@ -33,7 +39,7 @@ const defaultValues: Partial<ContactFormValues> = {
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [isResendSet, setIsResendSet] = useState(isResendConfigured());
+  const [isResendSet, setIsResendSet] = useState(false);
   
   // Initialize form with zod resolver
   const form = useForm<ContactFormValues>({
@@ -41,9 +47,15 @@ export function Contact() {
     defaultValues,
   });
 
+  // Check for stored API key on component mount
+  useEffect(() => {
+    const isInitialized = initializeResendFromStorage();
+    setIsResendSet(isInitialized);
+  }, []);
+  
   // Handle setting the Resend API key
   const handleSetApiKey = async () => {
-    const apiKey = prompt("Please enter your Resend API key:");
+    const apiKey = prompt("Please enter your Resend API key (it will be stored securely in your browser):");
     if (!apiKey) return;
     
     try {
@@ -51,16 +63,28 @@ export function Contact() {
       if (success) {
         setIsResendSet(true);
         toast({
-          title: "API Key Set",
-          description: "Resend API key has been set successfully.",
+          title: "API Key Set Successfully",
+          description: "Your Resend API key has been securely stored.",
         });
       }
     } catch (error) {
       console.error("Error setting API key:", error);
       toast({
-        title: "Error setting API key",
+        title: "Error Setting API Key",
         description: "Please try again with a valid Resend API key.",
         variant: "destructive",
+      });
+    }
+  };
+  
+  // Handle removing the Resend API key
+  const handleRemoveApiKey = () => {
+    if (confirm("Are you sure you want to remove your Resend API key?")) {
+      clearResendApiKey();
+      setIsResendSet(false);
+      toast({
+        title: "API Key Removed",
+        description: "Your Resend API key has been removed from storage.",
       });
     }
   };
@@ -130,17 +154,25 @@ export function Contact() {
       />
       
       <div className="mx-auto max-w-3xl relative z-10">
-        {!isResendSet && (
-          <div className="mb-4 text-center">
-            <Button onClick={handleSetApiKey} variant="outline" className="mb-4">
+        <div className="flex justify-center mb-4">
+          {!isResendSet ? (
+            <Button onClick={handleSetApiKey} variant="outline" className="mb-4 text-sm">
               <Key className="mr-2 h-4 w-4" />
               Set Resend API Key
             </Button>
-            <p className="text-sm text-muted-foreground">
-              Set your Resend API key to enable the contact form
-            </p>
-          </div>
-        )}
+          ) : (
+            <div className="flex gap-2 mb-4">
+              <Button variant="outline" className="text-sm text-green-500 pointer-events-none">
+                <CheckCircle className="mr-2 h-4 w-4" />
+                Resend API Key Configured
+              </Button>
+              <Button onClick={handleRemoveApiKey} variant="outline" className="text-sm text-red-500">
+                <Trash2 className="mr-2 h-4 w-4" />
+                Remove API Key
+              </Button>
+            </div>
+          )}
+        </div>
         
         <div className="glass rounded-xl p-6 md:p-8 animate-fade-in-up">
           {isSuccess ? (
