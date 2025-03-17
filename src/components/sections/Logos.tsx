@@ -28,8 +28,13 @@ export function Logos() {
       alt: "Sama",
       isPlaceholder: false
     },
+    {
+      id: 3,
+      src: "/lovable-uploads/3dbba578-0442-4d44-ab26-4de29b277135.png",
+      alt: "CalibrateHCM",
+      isPlaceholder: false
+    },
     // Placeholder logos
-    { id: 3, alt: "LOGO 3", isPlaceholder: true },
     { id: 4, alt: "LOGO 4", isPlaceholder: true },
     { id: 5, alt: "LOGO 5", isPlaceholder: true },
     { id: 6, alt: "LOGO 6", isPlaceholder: true }
