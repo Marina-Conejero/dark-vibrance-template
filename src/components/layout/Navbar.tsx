@@ -64,8 +64,8 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
             <NavLink href="#services">Services</NavLink>
-            <NavLink href="#process">Process</NavLink>
             <NavLink href="#solutions">Solutions</NavLink>
+            <NavLink href="#process">Process</NavLink>
             <NavLink href="#testimonials">Testimonials</NavLink>
           </nav>
 
@@ -98,8 +98,8 @@ export function Navbar() {
           <div className="container mx-auto container-padding">
             <nav className="flex flex-col space-y-3">
               <NavLink href="#services" onClick={closeMobileMenu}>Services</NavLink>
-              <NavLink href="#process" onClick={closeMobileMenu}>Process</NavLink>
               <NavLink href="#solutions" onClick={closeMobileMenu}>Solutions</NavLink>
+              <NavLink href="#process" onClick={closeMobileMenu}>Process</NavLink>
               <NavLink href="#testimonials" onClick={closeMobileMenu}>Testimonials</NavLink>
               <Button 
                 variant="primary" 
