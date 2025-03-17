@@ -15,7 +15,7 @@ import { Send, CheckCircle } from "lucide-react";
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
-  company: z.string().optional(),
+  company: z.string().min(1, { message: "Company is required." }),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
 });
 
@@ -58,27 +58,44 @@ export function Contact() {
       });
       
       if (!response.ok) {
-        throw new Error('Server responded with an error');
+        throw new Error('Network response was not ok');
       }
       
+      // Get the response text from the PHP script
       const result = await response.text();
       
-      // Show success message
-      toast({
-        title: "Message sent successfully",
-        description: "We'll get back to you as soon as possible.",
-      });
-      
-      // Reset the form
-      form.reset();
-      
-      // Show success state
-      setIsSuccess(true);
-      setTimeout(() => setIsSuccess(false), 3000);
+      // Check the response from the PHP script
+      if (result.includes('success')) {
+        // Show success message
+        toast({
+          title: "Message sent successfully!",
+          description: "We'll get back to you as soon as possible.",
+        });
+        
+        // Reset the form
+        form.reset();
+        
+        // Show success state
+        setIsSuccess(true);
+        setTimeout(() => setIsSuccess(false), 3000);
+      } else if (result.includes('error')) {
+        // Show error message
+        toast({
+          title: "Message failed to send",
+          description: "Please try again later.",
+          variant: "destructive",
+        });
+      } else {
+        // Show generic message for other responses
+        toast({
+          title: "Response received",
+          description: result,
+        });
+      }
     } catch (error) {
       console.error("Error sending message:", error);
       toast({
-        title: "Error sending message",
+        title: "An unexpected error occurred",
         description: "Please try again later or contact us directly.",
         variant: "destructive",
       });
@@ -154,7 +171,7 @@ export function Contact() {
                   name="company"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Company <span className="text-muted-foreground">(Optional)</span></FormLabel>
+                      <FormLabel>Company</FormLabel>
                       <FormControl>
                         <Input placeholder="Your company name" {...field} />
                       </FormControl>
