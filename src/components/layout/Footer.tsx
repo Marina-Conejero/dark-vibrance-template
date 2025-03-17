@@ -1,14 +1,16 @@
 
 import { Button } from "../ui/CustomButton";
+import { Link } from "react-router-dom";
+
 export function Footer() {
   return <footer className="bg-brand-darker pt-16 pb-8">
       <div className="container mx-auto container-padding">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Logo and Tagline */}
           <div className="md:col-span-2">
-            <a href="#" className="flex items-center mb-4">
+            <Link to="/" className="flex items-center mb-4">
               <img src="/lovable-uploads/6c91c7da-95b5-44dc-be82-f586e08d008f.png" alt="Hive Mechanics Logo" className="h-10 w-auto filter brightness-0 invert" />
-            </a>
+            </Link>
             <p className="text-gray-400 mb-4">
               Automating business growth through AI and no-code solutions.
             </p>
@@ -32,9 +34,9 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/terms-and-conditions" className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/terms-and-conditions" className="text-gray-400 hover:text-white transition-colors">
                   Terms & Conditions
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
