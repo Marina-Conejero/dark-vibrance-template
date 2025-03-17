@@ -55,11 +55,10 @@ export function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center">
             <img 
-              src="/lovable-uploads/5bc5b05d-0230-415a-8b79-d3140f155ce1.png" 
+              src="/lovable-uploads/6c91c7da-95b5-44dc-be82-f586e08d008f.png" 
               alt="Hive Mechanics Logo" 
-              className="h-8 w-auto"
+              className="h-10 w-auto"
             />
-            <span className="ml-2 text-xl font-bold">HIVE MECHANICS</span>
           </a>
 
           {/* Desktop Navigation */}
