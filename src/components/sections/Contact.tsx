@@ -47,17 +47,28 @@ export function Contact() {
       // Email address that will receive the contact form data
       const recipientEmail = "marina@hivemechanics.io";
       
-      // Here we'd normally use a backend API to send the email
-      // For now, we'll simulate a successful submission
-      console.log("Form data to be sent to:", recipientEmail, data);
+      // Create a mailto link that will open the user's email client
+      const subject = `Contact Form Submission from ${data.name}`;
+      const body = `
+Name: ${data.name}
+Email: ${data.email}
+Company: ${data.company || 'Not provided'}
+
+Message:
+${data.message}
+      `;
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Create and click a temporary link to open the default mail client
+      const mailtoLink = document.createElement('a');
+      mailtoLink.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      document.body.appendChild(mailtoLink);
+      mailtoLink.click();
+      document.body.removeChild(mailtoLink);
       
       // Show success message
       toast({
-        title: "Message sent successfully",
-        description: "We'll get back to you as soon as possible.",
+        title: "Email client opened",
+        description: "Please send the email that was prepared in your email client.",
       });
       
       // Reset the form
@@ -67,10 +78,10 @@ export function Contact() {
       setIsSuccess(true);
       setTimeout(() => setIsSuccess(false), 3000);
     } catch (error) {
-      console.error("Error sending message:", error);
+      console.error("Error processing form submission:", error);
       toast({
         title: "Error sending message",
-        description: "Please try again later or contact us directly.",
+        description: "Please try opening your email client manually or contact us directly.",
         variant: "destructive",
       });
     } finally {
