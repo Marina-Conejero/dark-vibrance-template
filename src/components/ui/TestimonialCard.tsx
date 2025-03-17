@@ -8,6 +8,7 @@ interface TestimonialCardProps {
   company: string;
   imageSrc: string;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export function TestimonialCard({
@@ -17,6 +18,7 @@ export function TestimonialCard({
   company,
   imageSrc,
   className,
+  style,
 }: TestimonialCardProps) {
   return (
     <div
@@ -24,6 +26,7 @@ export function TestimonialCard({
         "p-6 md:p-8 rounded-xl bg-card-gradient border border-white/5 transition-all duration-300 hover:shadow-lg hover:border-white/10",
         className
       )}
+      style={style}
     >
       <div className="mb-6">
         <svg width="32" height="24" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">

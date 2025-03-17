@@ -7,9 +7,10 @@ interface ProcessStepProps {
   title: string;
   description: string;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-export function ProcessStep({ icon, step, title, description, className }: ProcessStepProps) {
+export function ProcessStep({ icon, step, title, description, className, style }: ProcessStepProps) {
   const getStepColor = (step: number) => {
     switch (step) {
       case 1:
@@ -26,7 +27,7 @@ export function ProcessStep({ icon, step, title, description, className }: Proce
   };
 
   return (
-    <div className={cn("relative flex flex-col items-start", className)}>
+    <div className={cn("relative flex flex-col items-start", className)} style={style}>
       <div className={cn(
         "flex h-16 w-16 items-center justify-center rounded-full mb-6",
         getStepColor(step)
