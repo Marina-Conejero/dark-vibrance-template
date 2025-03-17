@@ -78,6 +78,10 @@
     @apply bg-white/5 backdrop-blur-md border border-white/10;
   }
 
+  .glass-highlight {
+    @apply bg-white/5 backdrop-blur-md border border-white/30 shadow-sm;
+  }
+
   .button-glow {
     @apply relative overflow-hidden;
   }

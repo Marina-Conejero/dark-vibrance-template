@@ -6,7 +6,7 @@ export function Hero() {
       <div className="container mx-auto container-padding text-center">
         <div className="max-w-4xl mx-auto">
           <div className="mb-6 inline-block animate-fade-in">
-            <span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 border border-white/10">
+            <span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 border border-white/30 shadow-sm">
               Automation Agency
             </span>
           </div>
