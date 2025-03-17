@@ -14,15 +14,15 @@ export function SolutionCard({ icon, title, description, className, link, style 
   return (
     <div 
       className={cn(
-        "relative p-6 md:p-8 rounded-xl bg-[#101826] border border-white/5 transition-all duration-300 hover:shadow-lg hover:shadow-brand-purple/5 hover:border-brand-purple/20 flex flex-col h-full",
+        "relative p-6 md:p-8 rounded-xl bg-card-gradient border border-white/5 transition-all duration-300 hover:shadow-lg hover:shadow-brand-purple/5 hover:border-brand-purple/20 flex flex-col h-full",
         className
       )}
       style={style}
     >
-      <div className="mb-5 flex h-10 w-10 items-center justify-center text-brand-purple">
+      <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-black/20 text-brand-purple">
         {icon}
       </div>
-      <h3 className="text-xl font-semibold mb-3">
+      <h3 className="text-xl font-semibold mb-3 group-hover:text-gradient-primary transition-all duration-300">
         {title}
       </h3>
       <p className="text-gray-300 mb-4 flex-grow">

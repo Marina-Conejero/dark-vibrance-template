@@ -1,7 +1,7 @@
 
 import { Section, SectionTitle } from "../ui/Section";
 import { SolutionCard } from "../ui/SolutionCard";
-import { LineChart, BarChart, MessageSquare, FileText, Rocket } from "lucide-react";
+import { LineChart, BarChart3, MessageSquare, FileText, Rocket } from "lucide-react";
 
 export function Solutions() {
   const solutions = [
@@ -12,7 +12,7 @@ export function Solutions() {
       link: "#"
     },
     {
-      icon: <BarChart className="h-6 w-6" />,
+      icon: <BarChart3 className="h-6 w-6" />,
       title: "Automated B2B Pre-Sales Engine",
       description: "AI-enhanced system that generates leads, qualifies prospects, and manages outreach without the need for a large sales team.",
       link: "#"
@@ -53,7 +53,7 @@ export function Solutions() {
             title={solution.title}
             description={solution.description}
             link={solution.link}
-            className="animate-fade-in-up"
+            className="animate-fade-in-up group"
             style={{ animationDelay: `${index * 0.1}s` }}
           />
         ))}
