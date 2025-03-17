@@ -112,13 +112,6 @@ export function Logos() {
     reader.readAsDataURL(file);
   };
 
-  // Reset to initial logos
-  const resetLogos = () => {
-    setLogos(initialLogos);
-    localStorage.setItem('companyLogos', JSON.stringify(initialLogos));
-    toast.success("Logos reset to defaults");
-  };
-
   return (
     <Section id="trusted-by" className="py-16 md:py-20">
       <SectionTitle 
@@ -194,12 +187,6 @@ export function Logos() {
             </DialogContent>
           </Dialog>
         ))}
-      </div>
-      
-      <div className="mt-8 flex justify-center">
-        <Button variant="outline" onClick={resetLogos} className="text-sm">
-          Reset to Default Logos
-        </Button>
       </div>
     </Section>
   );
