@@ -32,7 +32,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <a href="/terms-and-conditions" className="text-gray-400 hover:text-white transition-colors">
                   Terms & Conditions
                 </a>
               </li>
