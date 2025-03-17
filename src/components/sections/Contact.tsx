@@ -74,7 +74,14 @@ export function Contact() {
         throw new Error("Resend API key not set");
       }
       
-      await sendContactEmail(data);
+      // The data object from the form has the correct type structure that matches
+      // what sendContactEmail expects, with required name and email fields
+      await sendContactEmail({
+        name: data.name,
+        email: data.email,
+        company: data.company,
+        message: data.message
+      });
       
       // Show success message
       toast({
