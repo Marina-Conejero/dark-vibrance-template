@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -73,8 +74,6 @@ export function Contact() {
         throw new Error("Resend API key not set");
       }
       
-      // The data object from the form has the correct type structure that matches
-      // what sendContactEmail expects, with required name and email fields
       await sendContactEmail({
         name: data.name,
         email: data.email,
