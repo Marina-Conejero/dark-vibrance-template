@@ -1,0 +1,64 @@
+
+import { Section, SectionTitle } from "../ui/Section";
+import { ProcessStep } from "../ui/ProcessStep";
+import { Button } from "../ui/Button";
+import { Search, Layers, Cpu, Rocket } from "lucide-react";
+
+export function Process() {
+  const steps = [
+    {
+      icon: <Search className="h-6 w-6" />,
+      step: 1,
+      title: "Early Discovery",
+      description: "During the initial calls we deep dive into challenges and explore our inspiration catalogue. We rapidly create a clearly prioritized project plan."
+    },
+    {
+      icon: <Layers className="h-6 w-6" />,
+      step: 2,
+      title: "Parallel Delivery",
+      description: "We create 'low-hanging fruit' projects, which we can collaboratively deliver quickly to inspire, motivate the team and create early trust."
+    },
+    {
+      icon: <Cpu className="h-6 w-6" />,
+      step: 3,
+      title: "Implementation",
+      description: "Bigger projects we implement collaboratively alongside internal teams. We use proprietary solution maps to rapidly deploy MVPs and iterate them."
+    },
+    {
+      icon: <Rocket className="h-6 w-6" />,
+      step: 4,
+      title: "Strategic Innovation",
+      description: "Drive innovation and explore new opportunities to scale a competitive edge in the market."
+    }
+  ];
+
+  return (
+    <Section id="process">
+      <SectionTitle
+        subtitle="Our Process"
+        title="How We Support Our Partners"
+        description="Our proven methodology delivers quick wins while building toward long-term strategic goals."
+      />
+      
+      <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+        {steps.map((step, index) => (
+          <ProcessStep
+            key={index}
+            icon={step.icon}
+            step={step.step}
+            title={step.title}
+            description={step.description}
+            className="animate-fade-in-up"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          />
+        ))}
+      </div>
+      
+      <div className="mt-16 text-center">
+        <Button variant="primary" size="lg" hasArrow>
+          Start Your Journey
+        </Button>
+      </div>
+    </Section>
+  );
+}

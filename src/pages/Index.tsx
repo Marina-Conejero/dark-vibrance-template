@@ -1,12 +1,58 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { Background } from "@/components/ui/Background";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { Hero } from "@/components/sections/Hero";
+import { Services } from "@/components/sections/Services";
+import { Logos } from "@/components/sections/Logos";
+import { Solutions } from "@/components/sections/Solutions";
+import { Process } from "@/components/sections/Process";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { useEffect } from "react";
 
 const Index = () => {
+  // Smooth scroll for anchor links
+  useEffect(() => {
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const isAnchor = target.tagName === 'A' && target.getAttribute('href')?.startsWith('#');
+      
+      if (isAnchor) {
+        e.preventDefault();
+        const href = target.getAttribute('href');
+        const element = document.querySelector(href || '');
+        
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+    
+    document.addEventListener('click', handleAnchorClick);
+    
+    return () => {
+      document.removeEventListener('click', handleAnchorClick);
+    };
+  }, []);
+  
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="relative min-h-screen bg-black">
+      <Background starCount={150} />
+      
+      <Navbar />
+      
+      <main>
+        <Hero />
+        <Services />
+        <Logos />
+        <Solutions />
+        <Process />
+        <Testimonials />
+      </main>
+      
+      <Footer />
     </div>
   );
 };
