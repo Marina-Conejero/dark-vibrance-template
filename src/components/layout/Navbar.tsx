@@ -67,6 +67,7 @@ export function Navbar() {
             <NavLink href="#solutions">Solutions</NavLink>
             <NavLink href="#process">Process</NavLink>
             <NavLink href="#testimonials">Testimonials</NavLink>
+            <NavLink href="#contact">Contact</NavLink>
           </nav>
 
           {/* CTA Button */}
@@ -101,6 +102,7 @@ export function Navbar() {
               <NavLink href="#solutions" onClick={closeMobileMenu}>Solutions</NavLink>
               <NavLink href="#process" onClick={closeMobileMenu}>Process</NavLink>
               <NavLink href="#testimonials" onClick={closeMobileMenu}>Testimonials</NavLink>
+              <NavLink href="#contact" onClick={closeMobileMenu}>Contact</NavLink>
               <Button 
                 variant="primary" 
                 size="md"
