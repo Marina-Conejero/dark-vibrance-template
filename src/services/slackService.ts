@@ -25,9 +25,15 @@ export const sendToSlack = async (formData: {
   try {
     const { name, email, company, message } = formData;
     
+    // Get current date and time
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString();
+    const formattedTime = now.toLocaleTimeString();
+    const timestamp = `${formattedDate} at ${formattedTime}`;
+    
     // Format the message for Slack - using simpler format to avoid potential issues
     const slackMessage = {
-      text: `📬 *New Contact Form Submission*\n\n*From:* ${name}\n*Email:* ${email}\n*Company:* ${company}\n\n*Message:*\n${message}`
+      text: `📬 *New Contact Form Submission* (${timestamp})\n\n*From:* ${name}\n*Email:* ${email}\n*Company:* ${company}\n\n*Message:*\n${message}`
     };
     
     // For browser environments, we need to handle CORS
