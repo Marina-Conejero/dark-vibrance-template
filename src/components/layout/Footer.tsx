@@ -12,7 +12,7 @@ export function Footer() {
               <img 
                 src="/lovable-uploads/6c91c7da-95b5-44dc-be82-f586e08d008f.png" 
                 alt="Hive Mechanics Logo" 
-                className="h-10 w-auto"
+                className="h-10 w-auto filter brightness-0 invert"
               />
             </a>
             <p className="text-gray-400 mb-4">
