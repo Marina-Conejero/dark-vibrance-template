@@ -36,7 +36,7 @@ export function Process() {
     <Section id="process" className="py-24">
       <SectionTitle
         subtitle="Our Process"
-        title="How We Support Our Partners"
+        title={<>Overcoming the <i>"You don't know what you don't know"</i></>}
         description="Through proven implementation examples and a rapid discovery process, we help our partners uncover and leverage key AI and automation opportunities"
       />
       

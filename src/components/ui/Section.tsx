@@ -29,7 +29,7 @@ export function Section({
 
 interface SectionTitleProps {
   subtitle?: string;
-  title: string;
+  title: React.ReactNode;
   description?: string;
   alignment?: "left" | "center";
   className?: string;
