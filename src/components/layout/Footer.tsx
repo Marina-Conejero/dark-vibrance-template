@@ -1,19 +1,12 @@
-
 import { Button } from "../ui/CustomButton";
-
 export function Footer() {
-  return (
-    <footer className="bg-brand-darker pt-16 pb-8">
+  return <footer className="bg-brand-darker pt-16 pb-8">
       <div className="container mx-auto container-padding">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Logo and Tagline */}
           <div className="md:col-span-2">
             <a href="#" className="flex items-center mb-4">
-              <img 
-                src="/lovable-uploads/6c91c7da-95b5-44dc-be82-f586e08d008f.png" 
-                alt="Hive Mechanics Logo" 
-                className="h-10 w-auto filter brightness-0 invert"
-              />
+              <img src="/lovable-uploads/6c91c7da-95b5-44dc-be82-f586e08d008f.png" alt="Hive Mechanics Logo" className="h-10 w-auto filter brightness-0 invert" />
             </a>
             <p className="text-gray-400 mb-4">
               Automating business growth through AI and no-code solutions.
@@ -56,9 +49,7 @@ export function Footer() {
             <p className="text-gray-400 mb-4">
               Ready to automate your business growth? Let's talk.
             </p>
-            <Button variant="primary" hasArrow useCalendar>
-              Contact Us
-            </Button>
+            <Button variant="primary" hasArrow useCalendar>Book a Free Consult</Button>
           </div>
         </div>
 
@@ -82,6 +73,5 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 }
