@@ -23,7 +23,7 @@ export function Hero() {
             <Button variant="primary" size="lg" hasArrow useCalendar>
               Get Started
             </Button>
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="lg" onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}>
               Learn More
             </Button>
           </div>
