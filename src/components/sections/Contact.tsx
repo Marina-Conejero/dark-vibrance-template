@@ -10,6 +10,7 @@ import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/CustomButton";
 import { toast } from "../../hooks/use-toast";
 import { Send, CheckCircle } from "lucide-react";
+import emailjs from 'emailjs-com';
 
 // Schema for form validation
 const contactFormSchema = z.object({
@@ -29,6 +30,11 @@ const defaultValues: Partial<ContactFormValues> = {
   message: "",
 };
 
+// EmailJS configuration
+const EMAILJS_SERVICE_ID = "default_service"; // You'll need to replace this with your EmailJS service ID
+const EMAILJS_TEMPLATE_ID = "template_contact"; // You'll need to replace this with your EmailJS template ID
+const EMAILJS_USER_ID = "YOUR_USER_ID"; // You'll need to replace this with your EmailJS user ID
+
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -44,31 +50,28 @@ export function Contact() {
     setIsSubmitting(true);
     
     try {
-      // Email address that will receive the contact form data
-      const recipientEmail = "marina@hivemechanics.io";
+      // Prepare the template parameters for EmailJS
+      const templateParams = {
+        to_email: "marina@hivemechanics.io",
+        from_name: data.name,
+        from_email: data.email,
+        company: data.company || 'Not provided',
+        message: data.message,
+        subject: "New Contact Form Submission"
+      };
       
-      // Create a mailto link that will open the user's email client
-      const subject = `Contact Form Submission from ${data.name}`;
-      const body = `
-Name: ${data.name}
-Email: ${data.email}
-Company: ${data.company || 'Not provided'}
-
-Message:
-${data.message}
-      `;
-      
-      // Create and click a temporary link to open the default mail client
-      const mailtoLink = document.createElement('a');
-      mailtoLink.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      document.body.appendChild(mailtoLink);
-      mailtoLink.click();
-      document.body.removeChild(mailtoLink);
+      // Send the email using EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_USER_ID
+      );
       
       // Show success message
       toast({
-        title: "Email client opened",
-        description: "Please send the email that was prepared in your email client.",
+        title: "Message sent successfully",
+        description: "We'll get back to you as soon as possible.",
       });
       
       // Reset the form
@@ -78,10 +81,10 @@ ${data.message}
       setIsSuccess(true);
       setTimeout(() => setIsSuccess(false), 3000);
     } catch (error) {
-      console.error("Error processing form submission:", error);
+      console.error("Error sending message:", error);
       toast({
         title: "Error sending message",
-        description: "Please try opening your email client manually or contact us directly.",
+        description: "Please try again later or contact us directly.",
         variant: "destructive",
       });
     } finally {
