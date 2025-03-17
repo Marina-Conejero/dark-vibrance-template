@@ -9,7 +9,8 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/CustomButton";
 import { toast } from "../../hooks/use-toast";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, CheckCircle, Key } from "lucide-react";
+import { isResendConfigured, sendContactEmail, setResendApiKey } from "@/services/emailService";
 
 // Schema for form validation
 const contactFormSchema = z.object({
@@ -32,6 +33,7 @@ const defaultValues: Partial<ContactFormValues> = {
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isResendSet, setIsResendSet] = useState(isResendConfigured());
   
   // Initialize form with zod resolver
   const form = useForm<ContactFormValues>({
@@ -39,20 +41,40 @@ export function Contact() {
     defaultValues,
   });
 
+  // Handle setting the Resend API key
+  const handleSetApiKey = async () => {
+    const apiKey = prompt("Please enter your Resend API key:");
+    if (!apiKey) return;
+    
+    try {
+      const success = setResendApiKey(apiKey);
+      if (success) {
+        setIsResendSet(true);
+        toast({
+          title: "API Key Set",
+          description: "Resend API key has been set successfully.",
+        });
+      }
+    } catch (error) {
+      console.error("Error setting API key:", error);
+      toast({
+        title: "Error setting API key",
+        description: "Please try again with a valid Resend API key.",
+        variant: "destructive",
+      });
+    }
+  };
+
   // Handle form submission
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
     
     try {
-      // Email address that will receive the contact form data
-      const recipientEmail = "marina@hivemechanics.io";
+      if (!isResendSet) {
+        throw new Error("Resend API key not set");
+      }
       
-      // Here we'd normally use a backend API to send the email
-      // For now, we'll simulate a successful submission
-      console.log("Form data to be sent to:", recipientEmail, data);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await sendContactEmail(data);
       
       // Show success message
       toast({
@@ -68,11 +90,20 @@ export function Contact() {
       setTimeout(() => setIsSuccess(false), 3000);
     } catch (error) {
       console.error("Error sending message:", error);
-      toast({
-        title: "Error sending message",
-        description: "Please try again later or contact us directly.",
-        variant: "destructive",
-      });
+      
+      if (!isResendSet) {
+        toast({
+          title: "Resend API key not set",
+          description: "Please set your Resend API key first.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Error sending message",
+          description: "Please try again later or contact us directly.",
+          variant: "destructive",
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -94,6 +125,18 @@ export function Contact() {
       />
       
       <div className="mx-auto max-w-3xl relative z-10">
+        {!isResendSet && (
+          <div className="mb-4 text-center">
+            <Button onClick={handleSetApiKey} variant="outline" className="mb-4">
+              <Key className="mr-2 h-4 w-4" />
+              Set Resend API Key
+            </Button>
+            <p className="text-sm text-muted-foreground">
+              Set your Resend API key to enable the contact form
+            </p>
+          </div>
+        )}
+        
         <div className="glass rounded-xl p-6 md:p-8 animate-fade-in-up">
           {isSuccess ? (
             <div className="flex flex-col items-center justify-center py-12 text-center">
@@ -179,6 +222,7 @@ export function Contact() {
                     size="lg" 
                     isLoading={isSubmitting}
                     className="w-full md:w-auto"
+                    disabled={!isResendSet}
                   >
                     <Send className="mr-2 h-4 w-4" />
                     Send Message
