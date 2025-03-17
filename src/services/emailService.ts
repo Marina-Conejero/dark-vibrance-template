@@ -20,7 +20,7 @@ export const setResendApiKey = (key: string) => {
 export const sendContactEmail = async (formData: {
   name: string;
   email: string;
-  company?: string;
+  company: string;
   message: string;
 }) => {
   if (!resendInstance) {
@@ -38,7 +38,7 @@ export const sendContactEmail = async (formData: {
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
-        ${company ? `<p><strong>Company:</strong> ${company}</p>` : ''}
+        <p><strong>Company:</strong> ${company}</p>
         <p><strong>Message:</strong></p>
         <p>${message.replace(/\n/g, '<br>')}</p>
       `,

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -16,7 +15,7 @@ import { isResendConfigured, sendContactEmail, setResendApiKey } from "@/service
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
-  company: z.string().optional(),
+  company: z.string().min(1, { message: "Company name is required." }),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
 });
 
@@ -195,7 +194,7 @@ export function Contact() {
                   name="company"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Company <span className="text-muted-foreground">(Optional)</span></FormLabel>
+                      <FormLabel>Company</FormLabel>
                       <FormControl>
                         <Input placeholder="Your company name" {...field} />
                       </FormControl>
