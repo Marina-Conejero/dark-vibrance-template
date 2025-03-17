@@ -9,9 +9,9 @@ const TermsAndConditions = () => {
     <div className="min-h-screen bg-brand-dark flex flex-col">
       <Navbar />
       <main className="flex-grow">
-        <Section className="py-16 md:py-24">
+        <Section className="py-20 md:py-28">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold mb-8 text-gradient-primary">Terms and Conditions</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-10 text-gradient-primary text-center">Terms and Conditions</h1>
             
             <div className="space-y-8 text-gray-300">
               <div>
