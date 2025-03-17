@@ -8,6 +8,7 @@ import { Logos } from "@/components/sections/Logos";
 import { Solutions } from "@/components/sections/Solutions";
 import { Process } from "@/components/sections/Process";
 import { Testimonials } from "@/components/sections/Testimonials";
+import { Contact } from "@/components/sections/Contact";
 import { useEffect } from "react";
 
 const Index = () => {
@@ -50,6 +51,7 @@ const Index = () => {
         <Solutions />
         <Process />
         <Testimonials />
+        <Contact />
       </main>
       
       <Footer />
