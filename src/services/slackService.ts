@@ -3,38 +3,14 @@
  * Service for sending messages to Slack using webhooks
  */
 
-// This should be replaced with an environment variable in a production environment
-// For demo purposes, we'll use a placeholder that users need to replace
-let slackWebhookUrl = '';
-
-/**
- * Sets the Slack webhook URL
- */
-export const setSlackWebhookUrl = (url: string) => {
-  slackWebhookUrl = url;
-  // Store in localStorage for persistence
-  localStorage.setItem('slackWebhookUrl', url);
-};
-
-/**
- * Retrieves the stored Slack webhook URL
- */
-export const getSlackWebhookUrl = (): string => {
-  // Try to get from state first, then localStorage
-  if (!slackWebhookUrl) {
-    const storedUrl = localStorage.getItem('slackWebhookUrl');
-    if (storedUrl) {
-      slackWebhookUrl = storedUrl;
-    }
-  }
-  return slackWebhookUrl;
-};
+// Using the provided webhook URL
+const slackWebhookUrl = 'https://hooks.slack.com/services/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';
 
 /**
  * Checks if Slack webhook is configured
  */
 export const isSlackConfigured = (): boolean => {
-  return !!getSlackWebhookUrl();
+  return true; // Always return true since we have a hardcoded webhook URL
 };
 
 /**
@@ -46,13 +22,6 @@ export const sendToSlack = async (formData: {
   company: string;
   message: string;
 }): Promise<Response | null> => {
-  const webhookUrl = getSlackWebhookUrl();
-  
-  if (!webhookUrl) {
-    console.warn('Slack webhook URL not configured');
-    return null;
-  }
-  
   try {
     const { name, email, company, message } = formData;
     
@@ -102,7 +71,7 @@ export const sendToSlack = async (formData: {
       ]
     };
     
-    const response = await fetch(webhookUrl, {
+    const response = await fetch(slackWebhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

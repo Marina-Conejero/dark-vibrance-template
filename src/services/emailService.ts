@@ -33,14 +33,12 @@ export const sendContactEmail = async (formData: {
       `,
     });
     
-    // If Slack is configured, send to Slack as well
-    if (isSlackConfigured()) {
-      try {
-        await sendToSlack(formData);
-      } catch (slackError) {
-        console.error('Error sending to Slack:', slackError);
-        // Don't throw here, as we still sent the email successfully
-      }
+    // Always send to Slack as well since it's now configured by default
+    try {
+      await sendToSlack(formData);
+    } catch (slackError) {
+      console.error('Error sending to Slack:', slackError);
+      // Don't throw here, as we still sent the email successfully
     }
 
     return emailResponse;

@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,9 +9,9 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/CustomButton";
 import { toast } from "../../hooks/use-toast";
-import { Send, CheckCircle, Settings } from "lucide-react";
+import { Send, CheckCircle } from "lucide-react";
 import { sendContactEmail } from "@/services/emailService";
-import { getSlackWebhookUrl, setSlackWebhookUrl, isSlackConfigured } from "@/services/slackService";
+import { isSlackConfigured } from "@/services/slackService";
 
 // Schema for form validation
 const contactFormSchema = z.object({
@@ -31,49 +31,15 @@ const defaultValues: Partial<ContactFormValues> = {
   message: "",
 };
 
-// Schema for Slack webhook URL
-const slackWebhookSchema = z.object({
-  webhookUrl: z.string().url({ message: "Please enter a valid Slack webhook URL" })
-});
-
-type SlackWebhookFormValues = z.infer<typeof slackWebhookSchema>;
-
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [showSlackSettings, setShowSlackSettings] = useState(false);
   
   // Initialize form with zod resolver
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues,
   });
-
-  // Initialize Slack webhook form
-  const slackForm = useForm<SlackWebhookFormValues>({
-    resolver: zodResolver(slackWebhookSchema),
-    defaultValues: {
-      webhookUrl: ""
-    }
-  });
-
-  // Load saved webhook URL on component mount
-  useEffect(() => {
-    const savedUrl = getSlackWebhookUrl();
-    if (savedUrl) {
-      slackForm.setValue("webhookUrl", savedUrl);
-    }
-  }, [slackForm]);
-
-  // Handle Slack webhook form submission
-  const onSaveSlackWebhook = (data: SlackWebhookFormValues) => {
-    setSlackWebhookUrl(data.webhookUrl);
-    toast({
-      title: "Slack webhook saved",
-      description: "Contact form submissions will now be sent to your Slack channel."
-    });
-    setShowSlackSettings(false);
-  };
 
   // Handle form submission
   const onSubmit = async (data: ContactFormValues) => {
@@ -143,70 +109,9 @@ export function Contact() {
                 Send Another Message
               </Button>
             </div>
-          ) : showSlackSettings ? (
-            <div>
-              <h3 className="text-xl font-bold mb-4">Configure Slack Integration</h3>
-              <p className="text-gray-300 mb-6">
-                Enter your Slack webhook URL to receive contact form submissions in your Slack channel.
-                <br />
-                <a 
-                  href="https://api.slack.com/messaging/webhooks" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-brand-purple hover:underline"
-                >
-                  Learn how to create a Slack webhook
-                </a>
-              </p>
-              
-              <form onSubmit={slackForm.handleSubmit(onSaveSlackWebhook)} className="space-y-4">
-                <div className="space-y-2">
-                  <label htmlFor="webhookUrl" className="text-sm font-medium leading-none text-gray-200 mb-2 block">
-                    Webhook URL
-                  </label>
-                  <Input
-                    id="webhookUrl"
-                    placeholder="https://hooks.slack.com/services/..."
-                    {...slackForm.register("webhookUrl")}
-                  />
-                  {slackForm.formState.errors.webhookUrl && (
-                    <p className="text-sm font-medium text-destructive">
-                      {slackForm.formState.errors.webhookUrl.message}
-                    </p>
-                  )}
-                </div>
-                
-                <div className="flex justify-end space-x-2">
-                  <Button 
-                    type="button" 
-                    variant="outline" 
-                    onClick={() => setShowSlackSettings(false)}
-                  >
-                    Cancel
-                  </Button>
-                  <Button 
-                    type="submit" 
-                    variant="primary"
-                  >
-                    Save Webhook
-                  </Button>
-                </div>
-              </form>
-            </div>
           ) : (
             <div>
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-xl font-bold">Send us a message</h3>
-                <Button 
-                  variant="ghost" 
-                  size="sm"
-                  className="text-gray-400 hover:text-white"
-                  onClick={() => setShowSlackSettings(true)}
-                >
-                  <Settings className="h-4 w-4 mr-1" />
-                  Slack Settings
-                </Button>
-              </div>
+              <h3 className="text-xl font-bold mb-6">Send us a message</h3>
               
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
