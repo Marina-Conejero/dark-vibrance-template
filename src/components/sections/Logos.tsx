@@ -9,26 +9,26 @@ export function Logos() {
       key="1" 
       src="/lovable-uploads/6ab5cd4b-8184-4d99-bb45-8bff186cdc32.png" 
       alt="Mindspace" 
-      className="h-10 md:h-12 w-auto object-contain"
+      className="h-14 md:h-20 w-auto object-contain"
     />,
     // Sama logo (already has appropriate styling)
     <img 
       key="2" 
       src="/lovable-uploads/e2212927-4fa0-4ee6-abdd-e8419d81daaa.png" 
       alt="Sama" 
-      className="h-10 md:h-12 w-auto object-contain"
+      className="h-14 md:h-20 w-auto object-contain"
     />,
     // Remaining placeholder logos with white text on transparent background
-    <svg key="3" viewBox="0 0 100 50" className="h-10 md:h-12 w-auto">
+    <svg key="3" viewBox="0 0 100 50" className="h-14 md:h-20 w-auto">
       <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle" fontWeight="bold">LOGO 3</text>
     </svg>,
-    <svg key="4" viewBox="0 0 100 50" className="h-10 md:h-12 w-auto">
+    <svg key="4" viewBox="0 0 100 50" className="h-14 md:h-20 w-auto">
       <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle" fontWeight="bold">LOGO 4</text>
     </svg>,
-    <svg key="5" viewBox="0 0 100 50" className="h-10 md:h-12 w-auto">
+    <svg key="5" viewBox="0 0 100 50" className="h-14 md:h-20 w-auto">
       <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle" fontWeight="bold">LOGO 5</text>
     </svg>,
-    <svg key="6" viewBox="0 0 100 50" className="h-10 md:h-12 w-auto">
+    <svg key="6" viewBox="0 0 100 50" className="h-14 md:h-20 w-auto">
       <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle" fontWeight="bold">LOGO 6</text>
     </svg>,
   ];
@@ -49,11 +49,17 @@ export function Logos() {
         {logos.map((logo, index) => (
           <div 
             key={index} 
-            className="grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300 flex items-center justify-center h-16"
+            className="grayscale hover:grayscale-0 opacity-80 hover:opacity-100 transition-all duration-300 flex items-center justify-center h-20 md:h-24"
           >
             {logo}
           </div>
         ))}
+      </div>
+      
+      <div className="mt-8 text-center text-sm text-gray-400">
+        <p>For best results, create logos with these dimensions:</p>
+        <p>Recommended size: 400px × 200px (2:1 ratio)</p>
+        <p>Format: PNG with transparent background</p>
       </div>
     </Section>
   );
