@@ -28,7 +28,7 @@ export function Section({
 }
 
 interface SectionTitleProps {
-  subtitle?: string;
+  subtitle?: React.ReactNode;
   title: React.ReactNode;
   description?: string;
   alignment?: "left" | "center";
@@ -51,7 +51,7 @@ export function SectionTitle({
       )}
     >
       {subtitle && (
-        <div className="inline-block px-3 py-1 mb-4 text-sm font-medium text-brand-purple bg-brand-purple/10 rounded-full animate-fade-in">
+        <div className="mb-4 animate-fade-in">
           {subtitle}
         </div>
       )}

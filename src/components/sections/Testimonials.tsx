@@ -30,7 +30,11 @@ export function Testimonials() {
   return (
     <Section id="testimonials">
       <SectionTitle
-        subtitle="Testimonials"
+        subtitle={
+          <span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium glass-highlight">
+            Testimonials
+          </span>
+        }
         title="What Our Partners Say"
         description="Don't just take our word for it. Hear from the businesses we've helped transform through intelligent automation."
       />

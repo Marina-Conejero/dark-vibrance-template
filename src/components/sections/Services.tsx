@@ -40,7 +40,11 @@ export function Services() {
   return (
     <Section id="services">
       <SectionTitle
-        subtitle="Our Services"
+        subtitle={
+          <span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium glass-highlight">
+            Our Services
+          </span>
+        }
         title="Intelligent Automation Solutions"
         description="We leverage cutting-edge AI and no-code technologies to create automation solutions that drive real business value and tangible ROI."
       />

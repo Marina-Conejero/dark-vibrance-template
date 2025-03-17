@@ -35,7 +35,11 @@ export function Process() {
   return (
     <Section id="process" className="py-24">
       <SectionTitle
-        subtitle="Our Process"
+        subtitle={
+          <span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium glass-highlight">
+            Our Process
+          </span>
+        }
         title={<>Overcoming the <i>"You don't know what you don't know"</i></>}
         description="Through proven implementation examples and a rapid discovery process, we help our partners uncover and leverage key AI and automation opportunities"
       />

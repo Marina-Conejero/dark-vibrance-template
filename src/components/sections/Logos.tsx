@@ -36,7 +36,11 @@ export function Logos() {
   return (
     <Section id="trusted-by" className="py-16 md:py-20">
       <SectionTitle
-        subtitle="Trusted By"
+        subtitle={
+          <span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium glass-highlight">
+            Trusted By
+          </span>
+        }
         title="Companies We've Helped Transform"
         alignment="center"
       />

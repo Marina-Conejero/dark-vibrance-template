@@ -40,7 +40,11 @@ export function Solutions() {
   return (
     <Section id="solutions">
       <SectionTitle
-        subtitle="Proven Solutions"
+        subtitle={
+          <span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium glass-highlight">
+            Proven Solutions
+          </span>
+        }
         title="Proven Solutions in Action"
         description="Real-world examples of how our intelligent automation has transformed businesses across industries."
       />
