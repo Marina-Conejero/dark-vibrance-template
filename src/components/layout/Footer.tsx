@@ -9,10 +9,11 @@ export function Footer() {
           {/* Logo and Tagline */}
           <div className="md:col-span-2">
             <a href="#" className="flex items-center mb-4">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" rx="8" fill="#111111"/>
-                <path d="M18 8H6M6 12H18M6 16H18" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              <img 
+                src="/lovable-uploads/5bc5b05d-0230-415a-8b79-d3140f155ce1.png" 
+                alt="Hive Mechanics Logo" 
+                className="h-8 w-auto"
+              />
               <span className="ml-2 text-xl font-bold">HIVE MECHANICS</span>
             </a>
             <p className="text-gray-400 mb-4">
