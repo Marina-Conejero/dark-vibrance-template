@@ -14,12 +14,12 @@ export function SolutionCard({ icon, title, description, className, link, style 
   return (
     <div 
       className={cn(
-        "relative p-6 md:p-8 rounded-xl bg-[#101826] border border-white/5 transition-all duration-300 hover:shadow-lg hover:shadow-brand-blue/5 hover:border-brand-blue/20 flex flex-col h-full",
+        "relative p-6 md:p-8 rounded-xl bg-[#101826] border border-white/5 transition-all duration-300 hover:shadow-lg hover:shadow-brand-purple/5 hover:border-brand-purple/20 flex flex-col h-full",
         className
       )}
       style={style}
     >
-      <div className="mb-5 flex h-10 w-10 items-center justify-center">
+      <div className="mb-5 flex h-10 w-10 items-center justify-center text-brand-purple">
         {icon}
       </div>
       <h3 className="text-xl font-semibold mb-3">
@@ -31,7 +31,7 @@ export function SolutionCard({ icon, title, description, className, link, style 
       {link && (
         <a 
           href={link} 
-          className="text-brand-yellow hover:text-brand-yellow/80 font-medium text-sm inline-flex items-center transition-colors"
+          className="text-brand-purple hover:text-brand-purple/80 font-medium text-sm inline-flex items-center transition-colors"
         >
           Learn more
           <svg className="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

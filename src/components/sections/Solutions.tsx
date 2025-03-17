@@ -6,31 +6,31 @@ import { LineChart, BarChart, MessageSquare, FileText, Rocket } from "lucide-rea
 export function Solutions() {
   const solutions = [
     {
-      icon: <LineChart className="h-6 w-6 text-brand-yellow" />,
+      icon: <LineChart className="h-6 w-6" />,
       title: "AI-Powered Investment Pipeline",
       description: "Fully automated system that analyzes and selects promising companies for investment, enriches key contact data, and prepares outreach communications.",
       link: "#"
     },
     {
-      icon: <BarChart className="h-6 w-6 text-brand-yellow" />,
+      icon: <BarChart className="h-6 w-6" />,
       title: "Automated B2B Pre-Sales Engine",
       description: "AI-enhanced system that generates leads, qualifies prospects, and manages outreach without the need for a large sales team.",
       link: "#"
     },
     {
-      icon: <MessageSquare className="h-6 w-6 text-brand-yellow" />,
+      icon: <MessageSquare className="h-6 w-6" />,
       title: "AI Meeting Assistant",
       description: "Autonomous bot that tracks meetings, processes notes, updates CRM, and briefs team members before meetings.",
       link: "#"
     },
     {
-      icon: <FileText className="h-6 w-6 text-brand-yellow" />,
+      icon: <FileText className="h-6 w-6" />,
       title: "Automated Investor Updates",
       description: "System that aggregates updates from portfolio companies, market data, and trends to create quarterly investor reports.",
       link: "#"
     },
     {
-      icon: <Rocket className="h-6 w-6 text-brand-yellow" />,
+      icon: <Rocket className="h-6 w-6" />,
       title: "AI-Enhanced Growth Flywheel",
       description: "Integrated process for lead generation, data enrichment, and content creation, boosting growth without additional resource allocation.",
       link: "#"
