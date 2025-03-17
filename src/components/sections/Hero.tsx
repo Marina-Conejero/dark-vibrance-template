@@ -20,7 +20,7 @@ export function Hero() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up mb-12">
-            <Button variant="primary" size="lg" hasArrow>
+            <Button variant="primary" size="lg" hasArrow useCalendar>
               Get Started
             </Button>
             <Button variant="outline" size="lg">

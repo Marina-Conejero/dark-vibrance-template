@@ -56,7 +56,7 @@ export function Footer() {
             <p className="text-gray-400 mb-4">
               Ready to automate your business growth? Let's talk.
             </p>
-            <Button variant="primary" hasArrow>
+            <Button variant="primary" hasArrow useCalendar>
               Contact Us
             </Button>
           </div>

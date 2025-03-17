@@ -8,10 +8,11 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   size?: "sm" | "md" | "lg";
   hasArrow?: boolean;
   isLoading?: boolean;
+  useCalendar?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", hasArrow = false, isLoading = false, children, ...props }, ref) => {
+  ({ className, variant = "primary", size = "md", hasArrow = false, isLoading = false, useCalendar = false, children, ...props }, ref) => {
     const baseClasses = "inline-flex items-center justify-center rounded-md font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
     
     const variantClasses = {
@@ -28,6 +29,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       lg: "text-base px-6 h-12",
     };
 
+    // Add Cal.com attributes for primary buttons with useCalendar=true
+    const calAttributes = useCalendar && variant === "primary" ? {
+      "data-cal-link": "team/hive-mechanics/free-consultation",
+      "data-cal-namespace": "free-consultation",
+      "data-cal-config": '{"layout":"month_view"}'
+    } : {};
+
     return (
       <button
         ref={ref}
@@ -38,6 +46,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           hasArrow && "group",
           className
         )}
+        {...calAttributes}
         {...props}
       >
         {isLoading ? (

@@ -76,6 +76,7 @@ export function Navbar() {
               size="md"
               className="ml-4"
               hasArrow
+              useCalendar
             >
               Get in Touch
             </Button>
@@ -105,6 +106,7 @@ export function Navbar() {
                 size="md"
                 className="mt-4"
                 hasArrow
+                useCalendar
               >
                 Get in Touch
               </Button>

@@ -55,7 +55,7 @@ export function Process() {
       </div>
       
       <div className="mt-16 text-center">
-        <Button variant="primary" size="lg" hasArrow>
+        <Button variant="primary" size="lg" hasArrow useCalendar>
           Start Your Journey
         </Button>
       </div>
