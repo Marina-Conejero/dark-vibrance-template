@@ -9,21 +9,21 @@ export function Testimonials() {
       name: "Myra",
       role: "Founder & CEO",
       company: "@Sama",
-      imageSrc: "https://randomuser.me/api/portraits/women/44.jpg"
+      imageSrc: "/lovable-uploads/96c92154-20da-4bc7-8249-a19f9f28ea53.png"
     },
     {
       quote: "Pawel's support in automating and enhancing our pre-sales and cold outreach allowed us to process and reach out to thousands of leads each month without hiring a single sales person.",
       name: "Alex",
       role: "CEO",
       company: "@Valist",
-      imageSrc: "https://randomuser.me/api/portraits/men/32.jpg"
+      imageSrc: "/lovable-uploads/13574bcf-bb09-4097-8c29-c7995825351c.png"
     },
     {
       quote: "Pawel and his team's expertise propelled our AI usage to new heights, seamlessly integrating with our existing automated workflows and processes. The path from inspiration to implementation was impressively short.",
       name: "Tom",
       role: "Founder & CEO",
       company: "@MVPR",
-      imageSrc: "https://randomuser.me/api/portraits/men/67.jpg"
+      imageSrc: "/lovable-uploads/b61489a7-4f57-4896-a468-06aad3f52e40.png"
     }
   ];
 
