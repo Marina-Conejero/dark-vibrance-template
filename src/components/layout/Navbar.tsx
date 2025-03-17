@@ -67,15 +67,15 @@ export function Navbar() {
             <NavLink href="#solutions">Solutions</NavLink>
             <NavLink href="#process">Process</NavLink>
             <NavLink href="#testimonials">Testimonials</NavLink>
-            <NavLink href="#contact">Contact</NavLink>
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* CTA Button and Contact Link */}
+          <div className="hidden md:flex items-center">
+            <NavLink href="#contact">Contact</NavLink>
             <Button 
               variant="primary" 
               size="md"
-              className="ml-4"
+              className="ml-2"
               hasArrow
               useCalendar
             >
