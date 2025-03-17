@@ -9,7 +9,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Initialize Resend with API key
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resendApiKey = process.env.RESEND_API_KEY;
+if (!resendApiKey || resendApiKey === 'your_resend_api_key_here') {
+  console.warn('⚠️ WARNING: RESEND_API_KEY is not set or using default value. Email functionality will not work.');
+}
+const resend = new Resend(resendApiKey);
 
 // Middleware
 app.use(bodyParser.json());
@@ -62,4 +66,9 @@ app.get('*', (req, res) => {
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  if (!resendApiKey || resendApiKey === 'your_resend_api_key_here') {
+    console.log('📧 Email functionality is disabled. Set RESEND_API_KEY in .env file to enable it.');
+  } else {
+    console.log('📧 Email functionality is enabled.');
+  }
 });

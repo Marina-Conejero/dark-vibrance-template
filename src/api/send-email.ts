@@ -2,8 +2,11 @@
 import { Resend } from 'resend';
 
 // Initialize Resend with API key
-// You'll need to set up your Resend API key in your environment
-const resend = new Resend(process.env.RESEND_API_KEY || '');
+const resendApiKey = process.env.RESEND_API_KEY || '';
+if (!resendApiKey || resendApiKey === 'your_resend_api_key_here') {
+  console.warn('⚠️ WARNING: RESEND_API_KEY is not set or using default value. Email functionality will not work.');
+}
+const resend = new Resend(resendApiKey);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -14,6 +17,14 @@ export default async function handler(req, res) {
 
   if (!name || !email || !company || !message || !recipient) {
     return res.status(400).json({ success: false, error: 'Missing required fields' });
+  }
+
+  // Check if API key is set
+  if (!resendApiKey || resendApiKey === 'your_resend_api_key_here') {
+    return res.status(500).json({ 
+      success: false, 
+      error: 'Resend API key not configured. Please set the RESEND_API_KEY environment variable.'
+    });
   }
 
   try {
