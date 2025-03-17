@@ -8,9 +8,18 @@ import {
   DialogTitle, 
   DialogDescription 
 } from "../ui/dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/CustomButton";
+import { toast } from "sonner";
+
+// Define a type for our logo objects
+type Logo = {
+  id: number;
+  src: string;
+  alt: string;
+  isPlaceholder: boolean;
+};
 
 export function Logos() {
   // Define the initial state with real logos and placeholders
@@ -40,9 +49,30 @@ export function Logos() {
     { id: 6, alt: "LOGO 6", isPlaceholder: true }
   ];
 
-  const [logos, setLogos] = useState(initialLogos);
+  const [logos, setLogos] = useState<Logo[]>(initialLogos);
   const [selectedLogo, setSelectedLogo] = useState<number | null>(null);
   const [newAlt, setNewAlt] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+
+  // Load logos from localStorage on component mount
+  useEffect(() => {
+    const savedLogos = localStorage.getItem('companyLogos');
+    if (savedLogos) {
+      try {
+        const parsedLogos = JSON.parse(savedLogos);
+        setLogos(parsedLogos);
+      } catch (error) {
+        console.error('Failed to parse saved logos:', error);
+        // If parsing fails, fall back to initial logos
+        setLogos(initialLogos);
+      }
+    }
+  }, []);
+
+  // Save logos to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('companyLogos', JSON.stringify(logos));
+  }, [logos]);
 
   // Create placeholder SVG for empty slots
   const renderPlaceholder = (alt: string) => (
@@ -51,22 +81,42 @@ export function Logos() {
     </svg>
   );
 
-  // Handle logo upload
-  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files || !selectedLogo) return;
-    
-    const file = e.target.files[0];
-    if (!file) return;
+  // Handle file selection
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || !e.target.files[0]) return;
+    setFile(e.target.files[0]);
+  };
 
-    // Create a URL for the selected file
-    const objectUrl = URL.createObjectURL(file);
+  // Handle logo upload and update
+  const handleLogoUpload = () => {
+    if (!selectedLogo || !file) return;
     
-    // Update the logo in state
-    setLogos(prevLogos => prevLogos.map(logo => 
-      logo.id === selectedLogo 
-        ? { ...logo, src: objectUrl, alt: newAlt || logo.alt, isPlaceholder: false } 
-        : logo
-    ));
+    // Create a FileReader to read the file as a data URL
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (event.target && event.target.result) {
+        // Update the logo in state with the data URL
+        setLogos(prevLogos => prevLogos.map(logo => 
+          logo.id === selectedLogo 
+            ? { ...logo, src: event.target!.result as string, alt: newAlt || logo.alt, isPlaceholder: false } 
+            : logo
+        ));
+        
+        // Reset state
+        setFile(null);
+        toast.success("Logo updated successfully!");
+      }
+    };
+    
+    // Read the file as a data URL (this will be stored in localStorage)
+    reader.readAsDataURL(file);
+  };
+
+  // Reset to initial logos
+  const resetLogos = () => {
+    setLogos(initialLogos);
+    localStorage.setItem('companyLogos', JSON.stringify(initialLogos));
+    toast.success("Logos reset to defaults");
   };
 
   return (
@@ -90,6 +140,7 @@ export function Logos() {
                 onClick={() => {
                   setSelectedLogo(logo.id);
                   setNewAlt(logo.alt);
+                  setFile(null);
                 }}
               >
                 {logo.isPlaceholder ? (
@@ -130,16 +181,25 @@ export function Logos() {
                     id="logoFile"
                     type="file"
                     accept="image/*"
-                    onChange={handleLogoUpload}
+                    onChange={handleFileChange}
                   />
                   <p className="text-xs text-gray-400">
                     Recommended size: 400px × 200px (2:1 ratio)
                   </p>
                 </div>
+                <Button onClick={handleLogoUpload} disabled={!file}>
+                  Save Logo
+                </Button>
               </div>
             </DialogContent>
           </Dialog>
         ))}
+      </div>
+      
+      <div className="mt-8 flex justify-center">
+        <Button variant="outline" onClick={resetLogos} className="text-sm">
+          Reset to Default Logos
+        </Button>
       </div>
     </Section>
   );
