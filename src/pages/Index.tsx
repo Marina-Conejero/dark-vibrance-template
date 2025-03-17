@@ -9,7 +9,6 @@ import { Solutions } from "@/components/sections/Solutions";
 import { Process } from "@/components/sections/Process";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
-import { Toaster } from "@/components/ui/toaster";
 import { useEffect } from "react";
 
 const Index = () => {
@@ -56,7 +55,6 @@ const Index = () => {
       </main>
       
       <Footer />
-      <Toaster />
     </div>
   );
 };
