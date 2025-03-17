@@ -9,7 +9,7 @@ export function Testimonials() {
       name: "Myra",
       role: "Founder & CEO",
       company: "@Sama",
-      imageSrc: "/lovable-uploads/96c92154-20da-4bc7-8249-a19f9f28ea53.png"
+      imageSrc: "/lovable-uploads/f8bea835-d327-4857-ad13-2fa51a32da52.png"
     },
     {
       quote: "Pawel's support in automating and enhancing our pre-sales and cold outreach allowed us to process and reach out to thousands of leads each month without hiring a single sales person.",
