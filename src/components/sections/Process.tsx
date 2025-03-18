@@ -25,7 +25,7 @@ export function Process() {
     title: "Strategic Innovation",
     description: "Drive innovation and explore new opportunities to scale a competitive edge in the market."
   }];
-  return <Section id="process" className="py-16">
+  return <Section id="process" className="py-12">
       <SectionTitle subtitle={<span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium glass-highlight">
             Our Process
           </span>} title={<>Overcoming the <i>"You don't know what you don't know"</i></>} description="Through proven implementation examples and a rapid discovery process, we help our partners uncover and leverage key AI and automation opportunities" />
