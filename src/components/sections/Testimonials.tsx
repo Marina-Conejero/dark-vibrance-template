@@ -35,7 +35,7 @@ export function Testimonials() {
             Testimonials
           </span>
         }
-        title="What Our Partners Say"
+        title="Our Partners Collaborative Transformations"
         description="Don't just take our word for it. Hear from the businesses we've helped transform through intelligent automation."
       />
       
