@@ -113,7 +113,7 @@ export function Logos() {
   };
 
   return (
-    <Section id="trusted-by" className="py-16 md:py-20">
+    <Section id="trusted-by" className="py-12 md:py-16">
       <SectionTitle 
         subtitle={
           <span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium glass-highlight">
