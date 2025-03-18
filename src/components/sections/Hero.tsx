@@ -2,7 +2,7 @@
 import { Button } from "../ui/CustomButton";
 
 export function Hero() {
-  return <section className="relative min-h-screen flex items-center pt-24 pb-16">
+  return <section className="relative min-h-screen flex items-center pt-36 pb-16">
       <div className="container mx-auto container-padding text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight animate-fade-in lg:text-6xl">
