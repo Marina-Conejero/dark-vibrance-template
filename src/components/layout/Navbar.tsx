@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "../ui/CustomButton";
 import { cn } from "@/lib/utils";
@@ -58,7 +59,7 @@ export function Navbar() {
 
           {/* CTA Button and Contact Link */}
           <div className="hidden md:flex items-center">
-            <NavLink href="#contact">Contact</NavLink>
+            <NavLink href="#contact">Get in Touch</NavLink>
             <Button variant="primary" size="md" className="ml-2" hasArrow useCalendar>Book a Free Consult</Button>
           </div>
 
