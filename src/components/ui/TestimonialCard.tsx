@@ -30,7 +30,7 @@ export function TestimonialCard({
     >
       <div className="mb-6">
         <svg width="32" height="24" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M11.8667 0L7.14673 9.33333H14.2V24H0V10.6667L7.73336 0H11.8667ZM29.6667 0L25.0001 9.33333H32.0001V24H17.8V10.6667L25.5334 0H29.6667Z" fill="#8B5CF6"/>
+          <path d="M11.8667 0L7.14673 9.33333H14.2V24H0V10.6667L7.73336 0H11.8667ZM29.6667 0L25.0001 9.33333H32.0001V24H17.8V10.6667L25.5334 0H29.6667Z" fill="#4A1C2F"/>
         </svg>
       </div>
 
@@ -49,7 +49,7 @@ export function TestimonialCard({
         <div>
           <h4 className="font-medium text-white">{name}</h4>
           <p className="text-sm text-gray-400">
-            {role}, <a href="#" className="text-brand-purple">{company}</a>
+            {role}, <a href="#" className="text-white">{company}</a>
           </p>
         </div>
       </div>
