@@ -6,11 +6,10 @@ interface SolutionCardProps {
   title: string;
   description: string;
   className?: string;
-  link?: string;
   style?: React.CSSProperties;
 }
 
-export function SolutionCard({ icon, title, description, className, link, style }: SolutionCardProps) {
+export function SolutionCard({ icon, title, description, className, style }: SolutionCardProps) {
   return (
     <div 
       className={cn(
@@ -25,20 +24,9 @@ export function SolutionCard({ icon, title, description, className, link, style 
       <h3 className="text-xl font-semibold mb-3 group-hover:text-gradient-primary transition-all duration-300">
         {title}
       </h3>
-      <p className="text-gray-300 mb-4 flex-grow">
+      <p className="text-gray-300 flex-grow">
         {description}
       </p>
-      {link && (
-        <a 
-          href={link} 
-          className="text-brand-purple hover:text-brand-purple/80 font-medium text-sm inline-flex items-center transition-colors"
-        >
-          Learn more
-          <svg className="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </a>
-      )}
     </div>
   );
 }
