@@ -55,7 +55,7 @@ export function SectionTitle({
           {subtitle}
         </div>
       )}
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 animate-fade-in">
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 animate-fade-in text-white">
         {title}
       </h2>
       {description && (

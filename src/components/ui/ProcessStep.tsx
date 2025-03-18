@@ -26,7 +26,7 @@ export function ProcessStep({ icon, step, title, description, className, style, 
       {/* Step Number and Title */}
       <div className="flex flex-col items-start mb-3 w-full">
         <span className="text-sm font-medium text-gray-400 mb-1">Step {step}</span>
-        <h3 className="text-xl font-semibold">{title}</h3>
+        <h3 className="text-xl font-semibold text-white">{title}</h3>
       </div>
       
       {/* Description */}
