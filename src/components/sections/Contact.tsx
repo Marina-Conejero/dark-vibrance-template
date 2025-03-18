@@ -191,10 +191,12 @@ export function Contact() {
                   />
                   
                   <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-                    <button 
+                    <Button 
                       type="submit"
-                      className="text-brand-purple hover:text-brand-purple/80 font-medium text-sm inline-flex items-center transition-colors disabled:opacity-50 disabled:pointer-events-none"
+                      variant="outline" 
+                      size="md"
                       disabled={isSubmitting}
+                      className="inline-flex items-center justify-center border border-brand-purple/50 bg-transparent hover:bg-brand-purple/10 rounded-md font-medium"
                     >
                       {isSubmitting ? (
                         <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-t-transparent" />
@@ -202,7 +204,7 @@ export function Contact() {
                         <Send className="mr-2 h-4 w-4" />
                       )}
                       Send Message
-                    </button>
+                    </Button>
                     
                     <Button 
                       type="button"
