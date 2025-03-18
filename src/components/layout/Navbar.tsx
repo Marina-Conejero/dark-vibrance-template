@@ -3,11 +3,13 @@ import { Button } from "../ui/CustomButton";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
+
 interface NavLinkProps {
   href: string;
   children: React.ReactNode;
   onClick?: () => void;
 }
+
 function NavLink({
   href,
   children,
@@ -17,9 +19,11 @@ function NavLink({
       {children}
     </a>;
 }
+
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -27,12 +31,15 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
+
   return <header className={cn("fixed top-0 w-full z-50 transition-all duration-300 py-4", isScrolled && "bg-black/80 backdrop-blur-md shadow-lg py-3")}>
       <div className="container mx-auto container-padding">
         <div className="flex items-center justify-between">
@@ -70,7 +77,7 @@ export function Navbar() {
               <NavLink href="#solutions" onClick={closeMobileMenu}>Solutions</NavLink>
               <NavLink href="#process" onClick={closeMobileMenu}>Process</NavLink>
               <NavLink href="#testimonials" onClick={closeMobileMenu}>Testimonials</NavLink>
-              <NavLink href="#contact" onClick={closeMobileMenu}>Contact</NavLink>
+              <NavLink href="#contact" onClick={closeMobileMenu}>Get in Touch</NavLink>
               <Button variant="primary" size="md" className="mt-4" hasArrow useCalendar>Get Started</Button>
             </nav>
           </div>
