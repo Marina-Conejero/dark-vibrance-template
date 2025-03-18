@@ -20,7 +20,7 @@ export function Section({
       id={id} 
       className={cn("relative section-spacing w-full", className)}
     >
-      <div className={cn("container mx-auto container-padding", containerClassName)}>
+      <div className={cn("container mx-auto px-6 sm:px-6 lg:px-8", containerClassName)}>
         {children}
       </div>
     </section>
