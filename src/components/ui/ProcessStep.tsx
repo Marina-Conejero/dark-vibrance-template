@@ -16,7 +16,7 @@ export function ProcessStep({ icon, step, title, description, className, style, 
   return (
     <div className={cn("relative flex flex-col items-start", className)} style={style}>
       {/* Step Circle with Icon */}
-      <div className="flex h-16 w-16 items-center justify-center rounded-full mb-4 bg-brand-purple text-white">
+      <div className="flex h-16 w-16 items-center justify-center rounded-full mb-4 bg-[#4A1C2F] text-white">
         {icon}
       </div>
       
