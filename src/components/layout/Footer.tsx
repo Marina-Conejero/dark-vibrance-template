@@ -29,30 +29,38 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://www.linkedin.com/company/hive-mechanics/jobs/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                  Careers
+                <a href="#process" className="text-gray-400 hover:text-white transition-colors">
+                  Process
                 </a>
               </li>
               <li>
-                <Link to="/terms-and-conditions" className="text-gray-400 hover:text-white transition-colors">
-                  Terms & Conditions
-                </Link>
+                <a href="#contact" className="text-gray-400 hover:text-white transition-colors">
+                  Get in touch
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal & Careers */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Legal & Careers</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="https://www.linkedin.com/company/hive-mechanics/jobs/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                  Careers
+                </a>
               </li>
               <li>
                 <Link to="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">
                   Privacy Policy
                 </Link>
               </li>
+              <li>
+                <Link to="/terms-and-conditions" className="text-gray-400 hover:text-white transition-colors">
+                  Terms & Conditions
+                </Link>
+              </li>
             </ul>
-          </div>
-
-          {/* Get In Touch */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Get In Touch</h4>
-            <p className="text-gray-400 mb-4">
-              Ready to automate your business growth? Let's talk.
-            </p>
-            <Button variant="primary" hasArrow useCalendar>Book a Free Consult</Button>
           </div>
         </div>
 
