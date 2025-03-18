@@ -9,7 +9,7 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/CustomButton";
 import { toast } from "../../hooks/use-toast";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, CheckCircle, Phone } from "lucide-react";
 import { sendContactEmail } from "@/services/emailService";
 import { isSlackConfigured } from "@/services/slackService";
 
@@ -100,7 +100,12 @@ export function Contact() {
           </span>
         }
         title="Ready to Automate Your Business?"
-        description="Let's discuss how we can help you leverage AI and automation to grow without hiring."
+        description={
+          <>
+            Let's discuss how we can help you leverage AI and automation to grow without hiring.
+            <p className="mt-2 text-sm italic text-gray-300">*Guaranteed 100% sales-free communication, focused solely on technology</p>
+          </>
+        }
       />
       
       <div className="mx-auto max-w-3xl relative z-10">
@@ -185,16 +190,29 @@ export function Contact() {
                     )}
                   />
                   
-                  <div className="flex justify-end">
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+                    <button 
+                      type="submit"
+                      className="text-brand-purple hover:text-brand-purple/80 font-medium text-sm inline-flex items-center transition-colors disabled:opacity-50 disabled:pointer-events-none"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-t-transparent" />
+                      ) : (
+                        <Send className="mr-2 h-4 w-4" />
+                      )}
+                      Send Message
+                    </button>
+                    
                     <Button 
-                      type="submit" 
+                      type="button"
                       variant="primary" 
                       size="lg" 
-                      isLoading={isSubmitting}
+                      useCalendar
                       className="w-full md:w-auto"
                     >
-                      <Send className="mr-2 h-4 w-4" />
-                      Send Message
+                      <Phone className="mr-2 h-4 w-4" />
+                      Let's Speak Directly
                     </Button>
                   </div>
                 </form>
