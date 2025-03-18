@@ -1,6 +1,7 @@
 
 import { cn } from "@/lib/utils";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ProcessStepProps {
   icon: React.ReactNode;
@@ -13,6 +14,8 @@ interface ProcessStepProps {
 }
 
 export function ProcessStep({ icon, step, title, description, className, style, isLast = false }: ProcessStepProps) {
+  const isMobile = useIsMobile();
+  
   return (
     <div className={cn("relative flex flex-col items-start", className)} style={style}>
       {/* Step Circle with Icon */}
@@ -36,10 +39,16 @@ export function ProcessStep({ icon, step, title, description, className, style, 
         </div>
       )}
       
-      {/* Arrow at the bottom of each step */}
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mt-4">
-        <ArrowRight className="h-6 w-6 text-gray-400" />
-      </div>
+      {/* Arrow at the bottom of each step - Down arrow on mobile, Right arrow on larger screens */}
+      {!isLast && (
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mt-4">
+          {isMobile ? (
+            <ArrowDown className="h-6 w-6 text-gray-400" />
+          ) : (
+            <ArrowRight className="h-6 w-6 text-gray-400" />
+          )}
+        </div>
+      )}
     </div>
   );
 }

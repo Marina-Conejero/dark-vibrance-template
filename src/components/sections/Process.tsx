@@ -1,3 +1,4 @@
+
 import { Section, SectionTitle } from "../ui/Section";
 import { ProcessStep } from "../ui/ProcessStep";
 import { Button } from "../ui/CustomButton";
@@ -25,6 +26,7 @@ export function Process() {
     title: "Strategic Innovation",
     description: "Drive innovation and explore new opportunities to scale a competitive edge in the market."
   }];
+  
   return <Section id="process" className="py-12">
       <SectionTitle subtitle={<span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium glass-highlight">
             Our Process
