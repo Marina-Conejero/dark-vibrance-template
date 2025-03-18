@@ -14,7 +14,7 @@ export function Footer() {
             <p className="text-gray-400 mb-4">
               Automating business growth through AI and no-code solutions.
             </p>
-            <a href="mailto:hello@hivemechanics.io" className="text-white hover:text-white/80 transition-colors">
+            <a href="mailto:hello@hivemechanics.io" className="text-gray-400 hover:text-gray-300 transition-colors">
               hello@hivemechanics.io
             </a>
           </div>
