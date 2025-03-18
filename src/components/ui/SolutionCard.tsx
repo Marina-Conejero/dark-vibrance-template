@@ -18,10 +18,10 @@ export function SolutionCard({ icon, title, description, className, style }: Sol
       )}
       style={style}
     >
-      <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-black/20 text-brand-purple">
+      <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-brand-purple text-white">
         {icon}
       </div>
-      <h3 className="text-xl font-semibold mb-3 group-hover:text-gradient-primary transition-all duration-300">
+      <h3 className="text-xl font-semibold mb-3 group-hover:text-brand-purple transition-all duration-300">
         {title}
       </h3>
       <p className="text-gray-300 flex-grow">

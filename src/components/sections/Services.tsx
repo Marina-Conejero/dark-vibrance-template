@@ -6,32 +6,32 @@ import { Brain, Workflow, BarChart3, Layers, Code, Users } from "lucide-react";
 export function Services() {
   const services = [
     {
-      icon: <Brain className="h-6 w-6" />,
+      icon: <Brain className="h-8 w-8" />,
       title: "AI Implementation",
       description: "Strategic AI implementation that solves real business problems without requiring extensive technical expertise."
     },
     {
-      icon: <Workflow className="h-6 w-6" />,
+      icon: <Workflow className="h-8 w-8" />,
       title: "No-Code Automation",
       description: "Building efficient workflows and systems that automate repetitive tasks, freeing your team to focus on high-value work."
     },
     {
-      icon: <BarChart3 className="h-6 w-6" />,
+      icon: <BarChart3 className="h-8 w-8" />,
       title: "Process Optimization",
       description: "Analyzing and redesigning business processes to maximize efficiency, reduce costs, and improve customer experience."
     },
     {
-      icon: <Layers className="h-6 w-6" />,
+      icon: <Layers className="h-8 w-8" />,
       title: "Tech Stack Integration",
       description: "Seamlessly connecting your existing tools and platforms to create a unified, efficient technology ecosystem."
     },
     {
-      icon: <Code className="h-6 w-6" />,
+      icon: <Code className="h-8 w-8" />,
       title: "Hands-on Implementation",
       description: "Expert execution of automation solutions that deliver immediate value with minimal disruption to your operations."
     },
     {
-      icon: <Users className="h-6 w-6" />,
+      icon: <Users className="h-8 w-8" />,
       title: "Training & Knowledge Transfer",
       description: "Empowering your team with the skills and knowledge to maintain and expand upon the automation solutions we build."
     }
