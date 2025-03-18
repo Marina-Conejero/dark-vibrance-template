@@ -100,12 +100,7 @@ export function Contact() {
           </span>
         }
         title="Ready to Automate Your Business?"
-        description={
-          <>
-            Let's discuss how we can help you leverage AI and automation to grow without hiring.
-            <p className="mt-2 text-sm italic text-gray-300">*Guaranteed 100% sales-free communication, focused solely on technology</p>
-          </>
-        }
+        description="Let's discuss how we can help you leverage AI and automation to grow without hiring."
       />
       
       <div className="mx-auto max-w-3xl relative z-10">
