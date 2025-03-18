@@ -103,11 +103,6 @@ export function Contact() {
         description="Let's discuss how we can help you leverage AI and automation to grow without hiring."
       />
       
-      {/* Added disclaimer text with reduced spacing (mt-0 instead of mt-2) */}
-      <p className="text-center text-sm text-gray-400 mt-0 mb-6 italic">
-        *Guaranteed 100% sales-free communication, focused solely on technology
-      </p>
-      
       <div className="mx-auto max-w-3xl relative z-10">
         <div className="glass rounded-xl p-6 md:p-8 animate-fade-in-up">
           {isSuccess ? (
