@@ -56,11 +56,11 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))"
         },
-        // Custom brand colors
+        // Custom brand colors - updated to new values
         brand: {
-          purple: "#8B5CF6",
-          blue: "#0EA5E9",
-          yellow: "#F59E0B",
+          purple: "#4A1C2F", // Updated from #8B5CF6
+          blue: "#1C0F37",   // Updated from #0EA5E9
+          yellow: "#F59E0B", // Keeping yellow as is
           dark: "#121212",
           darker: "#0A0A0A",
           "dark-card": "#171717",

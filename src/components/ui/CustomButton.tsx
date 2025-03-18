@@ -17,7 +17,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     
     const variantClasses = {
       primary: "bg-gradient-primary hover:opacity-90 text-white shadow-md hover:shadow-lg button-glow",
-      secondary: "bg-gradient-secondary hover:opacity-90 text-black shadow-md hover:shadow-lg button-glow",
+      secondary: "bg-gradient-secondary hover:opacity-90 text-white shadow-md hover:shadow-lg button-glow", // Changed text color to white for better contrast
       outline: "border border-brand-purple/50 bg-transparent hover:bg-brand-purple/10 text-white",
       ghost: "bg-transparent hover:bg-white/10 text-white",
       link: "bg-transparent underline-offset-4 hover:underline text-white p-0 h-auto",
