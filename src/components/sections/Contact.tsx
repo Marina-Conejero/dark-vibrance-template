@@ -100,7 +100,12 @@ export function Contact() {
           </span>
         }
         title="Ready to Automate Your Business?"
-        description="Let's discuss how we can help you leverage AI and automation to grow without hiring."
+        description={
+          <div className="space-y-1">
+            <p>Let's discuss how we can help you leverage AI and automation to grow without hiring.</p>
+            <p className="text-sm text-gray-400">*Guaranteed 100% sales-free communication, focused solely on technology</p>
+          </div>
+        }
       />
       
       <div className="mx-auto max-w-3xl relative z-10">
@@ -221,3 +226,4 @@ export function Contact() {
     </Section>
   );
 }
+
