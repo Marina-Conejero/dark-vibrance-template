@@ -16,8 +16,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const baseClasses = "inline-flex items-center justify-center rounded-md font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
     
     const variantClasses = {
-      primary: "bg-[#4A1C2F] hover:opacity-90 text-white shadow-md hover:shadow-lg button-glow border border-white/10",
-      secondary: "bg-[#4A1C2F] hover:opacity-90 text-white shadow-md hover:shadow-lg button-glow border border-white/10",
+      primary: "bg-gradient-primary hover:opacity-90 text-white shadow-md hover:shadow-lg button-glow border border-white/10",
+      secondary: "bg-gradient-secondary hover:opacity-90 text-white shadow-md hover:shadow-lg button-glow border border-white/10",
       outline: "border border-white/30 bg-transparent hover:bg-white/10 text-white",
       ghost: "bg-transparent hover:bg-white/10 text-white",
       link: "bg-transparent underline-offset-4 hover:underline text-white p-0 h-auto",
