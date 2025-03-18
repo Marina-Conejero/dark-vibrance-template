@@ -36,7 +36,7 @@ export function Process() {
       </div>
       
       <div className="mt-20 text-center">
-        <Button variant="primary" size="lg" hasArrow useCalendar>Book a Free Consult</Button>
+        <Button variant="primary" size="lg" hasArrow useCalendar>Get Started</Button>
       </div>
     </Section>;
 }
