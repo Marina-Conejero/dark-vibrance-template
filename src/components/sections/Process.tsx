@@ -8,23 +8,23 @@ export function Process() {
   const steps = [{
     icon: <Search className="h-6 w-6" />,
     step: 1,
-    title: "Early Discovery",
-    description: "During the initial calls we deep dive into challenges and explore our inspiration catalogue. We rapidly create a clearly prioritized project plan."
+    title: "Rapid Discovery",
+    description: "During the initial calls, we dive deep into challenges, set priorities and identify 'low-hanging fruit' solutions for rapid implementation alongside major projects."
   }, {
     icon: <Layers className="h-6 w-6" />,
     step: 2,
-    title: "Parallel Delivery",
-    description: "We create 'low-hanging fruit' projects, which we can collaboratively deliver quickly to inspire, motivate the team and create early trust."
+    title: "Collaborative Implementation",
+    description: "We always implement our solutions collaboratively alongside internal teams. We use our unique solution maps to rapidly deploy MVPs and iterate them."
   }, {
     icon: <Cpu className="h-6 w-6" />,
     step: 3,
-    title: "Implementation",
-    description: "Bigger projects we implement collaboratively alongside internal teams. We use proprietary solution maps to rapidly deploy MVPs and iterate them."
+    title: "Know How Transfer",
+    description: "We provide all the tools and training necessary for your team to not only seamlessly integrate our solutions, but also to effectively leverage them for long-term success."
   }, {
     icon: <Rocket className="h-6 w-6" />,
     step: 4,
-    title: "Strategic Innovation",
-    description: "Drive innovation and explore new opportunities to scale a competitive edge in the market."
+    title: "Competitive Advantage",
+    description: "We equip you with up-to-date insights and strategic guidance that secure your competitive edge and ensure your AI & Automation strategy is continuously updated."
   }];
   
   return <Section id="process" className="py-12">
