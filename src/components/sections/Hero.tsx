@@ -1,12 +1,19 @@
 
 import { Button } from "../ui/CustomButton";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function Hero() {
+  const isMobile = useIsMobile();
+  
   return <section className="relative min-h-screen flex items-center pt-36 pb-16">
       <div className="container mx-auto container-padding text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight animate-fade-in lg:text-6xl">
-            Grow your business without hiring with <span className="text-gradient-primary">No-Code, AI & Automation</span>
+            Grow your business without hiring with {isMobile ? (
+              <span className="text-gradient-primary whitespace-nowrap">No&#8209;Code, AI & Automation</span>
+            ) : (
+              <span className="text-gradient-primary">No-Code, AI & Automation</span>
+            )}
           </h1>
           
           <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto animate-fade-in-up">
