@@ -53,7 +53,7 @@ const PrivacyPolicy = () => {
       <main className="flex-grow">
         <Section className="pt-40 md:pt-48 pb-20 md:pb-28">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-gradient-primary text-center">Privacy Policy</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-white text-center">Privacy Policy</h1>
             <p className="text-center text-gray-400 mb-10">Last Updated: May 14, 2024</p>
             
             <p className="mb-10 text-gray-300 leading-relaxed">
