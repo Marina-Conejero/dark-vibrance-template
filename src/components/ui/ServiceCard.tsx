@@ -13,7 +13,7 @@ export function ServiceCard({ icon, title, description, className, style }: Serv
   return (
     <div 
       className={cn(
-        "relative p-6 md:p-8 rounded-xl bg-card-gradient border border-white/5 transition-all duration-300 hover:shadow-lg hover:shadow-brand-purple/5 hover:border-brand-purple/20 group",
+        "relative p-6 md:p-8 rounded-xl bg-card-gradient border border-white/5 transition-all duration-300 hover:shadow-lg hover:shadow-brand-purple/5 hover:border-brand-purple/20 flex flex-col h-full",
         className
       )}
       style={style}
@@ -24,7 +24,7 @@ export function ServiceCard({ icon, title, description, className, style }: Serv
       <h3 className="text-xl font-semibold mb-3 text-white">
         {title}
       </h3>
-      <p className="text-gray-300">
+      <p className="text-gray-300 flex-grow">
         {description}
       </p>
     </div>
