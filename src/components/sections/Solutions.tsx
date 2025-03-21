@@ -6,7 +6,7 @@ import { LineChart, Users, Cog, Lightbulb, Database } from "lucide-react";
 export function Solutions() {
   const solutions = [{
     icon: <LineChart className="h-8 w-8" />,
-    title: "Sales & Marketing",
+    title: "Sales &\nMarketing",
     description: "AI-based lead generation with 360 enrichment,\ncontent generation AI Bot, automated outreach,\nreal-time dashboards, sales alerts, automated sales channel discovery."
   }, {
     icon: <Users className="h-8 w-8" />,
@@ -22,7 +22,7 @@ export function Solutions() {
     description: "LLM-based ideation, real-time feedback, rapid prototyping, multi-format data extraction, natural language to database queries, concept visualization, AI custom interfaces from Email to WhatsApp."
   }, {
     icon: <Database className="h-8 w-8" />,
-    title: "Data & Reporting",
+    title: "Data &\nReporting",
     description: "No-code data pipelines, predictive forecasting,\ncustom BI, real-time alerts, automated dashboards,\nanomaly detection, automated data summaries, data reformatting."
   }];
   
