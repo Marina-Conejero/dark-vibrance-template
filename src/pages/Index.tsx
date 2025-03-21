@@ -35,8 +35,8 @@ const Index = () => {
     
     document.addEventListener('click', handleAnchorClick);
     
-    // Clear localStorage on initial load to ensure fresh logo setup (remove after debugging)
-    // localStorage.removeItem('companyLogos');
+    // Clear localStorage for logos to ensure fresh logo setup
+    localStorage.removeItem('companyLogos');
     
     return () => {
       document.removeEventListener('click', handleAnchorClick);

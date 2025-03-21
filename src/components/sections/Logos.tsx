@@ -12,7 +12,6 @@ import { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/CustomButton";
 import { toast } from "sonner";
-import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 
 type Logo = {
   id: number;
@@ -22,41 +21,41 @@ type Logo = {
 };
 
 export function Logos() {
-  // Updated initial logos with your new ones
+  // Updated initial logos with the new uploaded ones
   const initialLogos: Logo[] = [
     {
       id: 1,
-      src: "/lovable-uploads/a6ea8c7b-03c0-4968-bcdd-359d251b751e.png",
+      src: "/lovable-uploads/2b8c6abf-04f5-4725-b570-16dc7c015d27.png",
       alt: "Mindspace",
       isPlaceholder: false
     },
     {
       id: 2,
-      src: "/lovable-uploads/e2212927-4fa0-4ee6-abdd-e8419d81daaa.png",
+      src: "/lovable-uploads/7afe8b5c-c8e1-484a-95fb-62f13603bc23.png",
       alt: "Sama",
       isPlaceholder: false
     },
     {
       id: 3,
-      src: "/lovable-uploads/3dbba578-0442-4d44-ab26-4de29b277135.png",
+      src: "/lovable-uploads/8a14e59e-6c72-4310-9e3e-f311241e1ab2.png",
       alt: "CalibrateHCM",
       isPlaceholder: false
     },
     {
       id: 4,
-      src: "/lovable-uploads/3b9b867b-393f-4fe1-af3b-f519c56c76ce.png",
+      src: "/lovable-uploads/1a374cef-d896-4bd8-b921-35c15a3fae23.png",
       alt: "MVPR",
       isPlaceholder: false
     },
     {
       id: 5,
-      src: "/lovable-uploads/3b9b867b-393f-4fe1-af3b-f519c56c76ce.png",
-      alt: "Sama",
+      src: "/lovable-uploads/af30a4e8-15da-4b2f-bb54-4c78ac9b814a.png",
+      alt: "Hyperscale",
       isPlaceholder: false
     },
     {
       id: 6,
-      src: "/lovable-uploads/3b9b867b-393f-4fe1-af3b-f519c56c76ce.png",
+      src: "/lovable-uploads/52a2a068-c063-4afe-a334-8cf378e55fd9.png",
       alt: "Nordstar",
       isPlaceholder: false
     }
@@ -77,33 +76,51 @@ export function Logos() {
       if (savedLogos) {
         const parsedLogos = JSON.parse(savedLogos);
         if (Array.isArray(parsedLogos) && parsedLogos.length > 0) {
-          setLogos(parsedLogos);
-          console.log("Loaded logos from localStorage:", parsedLogos);
+          // Check if we should update to the new logos
+          const shouldUpdate = !parsedLogos.some(logo => 
+            initialLogos.find(initial => initial.src === logo.src)
+          );
+          
+          if (shouldUpdate) {
+            // Update to new logos and save to localStorage
+            setLogos(initialLogos);
+            localStorage.setItem('companyLogos', JSON.stringify(initialLogos));
+            console.log("Updated to new logos and saved to localStorage");
+            toast.success("New logos have been loaded");
+          } else {
+            setLogos(parsedLogos);
+            console.log("Loaded logos from localStorage:", parsedLogos);
+          }
         } else {
           // If saved logos aren't valid, use initial logos
           setLogos(initialLogos);
           localStorage.setItem('companyLogos', JSON.stringify(initialLogos));
           console.log("Saved initial logos to localStorage");
+          toast.success("New logos have been loaded");
         }
       } else {
         // If no saved logos, use initial logos
         setLogos(initialLogos);
         localStorage.setItem('companyLogos', JSON.stringify(initialLogos));
         console.log("No saved logos, using initial logos");
+        toast.success("New logos have been loaded");
       }
     } catch (error) {
       console.error('Failed to load saved logos:', error);
       // If error, use initial logos
       setLogos(initialLogos);
       localStorage.setItem('companyLogos', JSON.stringify(initialLogos));
+      toast.success("New logos have been loaded");
     }
   }, []);
 
   // Save logos to localStorage whenever they change
   useEffect(() => {
     try {
-      localStorage.setItem('companyLogos', JSON.stringify(logos));
-      console.log("Saved updated logos to localStorage:", logos);
+      if (logos && logos.length > 0) {
+        localStorage.setItem('companyLogos', JSON.stringify(logos));
+        console.log("Saved updated logos to localStorage:", logos);
+      }
     } catch (error) {
       console.error("Failed to save logos to localStorage:", error);
     }
@@ -217,7 +234,7 @@ export function Logos() {
               <img 
                 src={logo.src} 
                 alt={logo.alt} 
-                className="h-24 md:h-32 w-auto object-contain"
+                className="h-16 md:h-20 w-auto max-w-full object-contain"
                 onError={(e) => {
                   console.error(`Failed to load image for ${logo.alt}:`, logo.src);
                   const target = e.target as HTMLImageElement;
