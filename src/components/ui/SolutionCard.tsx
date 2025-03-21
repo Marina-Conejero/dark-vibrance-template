@@ -21,7 +21,7 @@ export function SolutionCard({ icon, title, description, className, style }: Sol
       <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-brand-purple text-white">
         {icon}
       </div>
-      <h3 className="text-xl font-semibold mb-3 group-hover:text-brand-purple transition-all duration-300">
+      <h3 className="text-xl font-semibold mb-3 text-white">
         {title}
       </h3>
       <p className="text-gray-300 flex-grow">
