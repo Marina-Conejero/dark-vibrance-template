@@ -9,6 +9,7 @@ import { Solutions } from "@/components/sections/Solutions";
 import { Process } from "@/components/sections/Process";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
+import { Toaster as SonnerToaster } from "sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { useEffect } from "react";
 
@@ -34,6 +35,9 @@ const Index = () => {
     
     document.addEventListener('click', handleAnchorClick);
     
+    // Clear localStorage on initial load to ensure fresh logo setup (remove after debugging)
+    // localStorage.removeItem('companyLogos');
+    
     return () => {
       document.removeEventListener('click', handleAnchorClick);
     };
@@ -57,6 +61,7 @@ const Index = () => {
       
       <Footer />
       <Toaster />
+      <SonnerToaster position="top-right" />
     </div>
   );
 };

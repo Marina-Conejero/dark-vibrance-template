@@ -22,6 +22,7 @@ type Logo = {
 };
 
 export function Logos() {
+  // Updated initial logos with your new ones
   const initialLogos: Logo[] = [
     {
       id: 1,
@@ -41,9 +42,24 @@ export function Logos() {
       alt: "CalibrateHCM",
       isPlaceholder: false
     },
-    { id: 4, src: "", alt: "LOGO 4", isPlaceholder: true },
-    { id: 5, src: "", alt: "LOGO 5", isPlaceholder: true },
-    { id: 6, src: "", alt: "LOGO 6", isPlaceholder: true }
+    {
+      id: 4,
+      src: "/lovable-uploads/3b9b867b-393f-4fe1-af3b-f519c56c76ce.png",
+      alt: "MVPR",
+      isPlaceholder: false
+    },
+    {
+      id: 5,
+      src: "/lovable-uploads/3b9b867b-393f-4fe1-af3b-f519c56c76ce.png",
+      alt: "Sama",
+      isPlaceholder: false
+    },
+    {
+      id: 6,
+      src: "/lovable-uploads/3b9b867b-393f-4fe1-af3b-f519c56c76ce.png",
+      alt: "Nordstar",
+      isPlaceholder: false
+    }
   ];
 
   const [logos, setLogos] = useState<Logo[]>(initialLogos);
@@ -55,21 +71,42 @@ export function Logos() {
 
   // Load saved logos from localStorage on component mount
   useEffect(() => {
-    const savedLogos = localStorage.getItem('companyLogos');
-    if (savedLogos) {
-      try {
+    try {
+      const savedLogos = localStorage.getItem('companyLogos');
+      // Only use saved logos if they exist and are valid JSON
+      if (savedLogos) {
         const parsedLogos = JSON.parse(savedLogos);
-        setLogos(parsedLogos);
-      } catch (error) {
-        console.error('Failed to parse saved logos:', error);
+        if (Array.isArray(parsedLogos) && parsedLogos.length > 0) {
+          setLogos(parsedLogos);
+          console.log("Loaded logos from localStorage:", parsedLogos);
+        } else {
+          // If saved logos aren't valid, use initial logos
+          setLogos(initialLogos);
+          localStorage.setItem('companyLogos', JSON.stringify(initialLogos));
+          console.log("Saved initial logos to localStorage");
+        }
+      } else {
+        // If no saved logos, use initial logos
         setLogos(initialLogos);
+        localStorage.setItem('companyLogos', JSON.stringify(initialLogos));
+        console.log("No saved logos, using initial logos");
       }
+    } catch (error) {
+      console.error('Failed to load saved logos:', error);
+      // If error, use initial logos
+      setLogos(initialLogos);
+      localStorage.setItem('companyLogos', JSON.stringify(initialLogos));
     }
   }, []);
 
   // Save logos to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem('companyLogos', JSON.stringify(logos));
+    try {
+      localStorage.setItem('companyLogos', JSON.stringify(logos));
+      console.log("Saved updated logos to localStorage:", logos);
+    } catch (error) {
+      console.error("Failed to save logos to localStorage:", error);
+    }
   }, [logos]);
 
   const renderPlaceholder = (alt: string) => (
@@ -97,35 +134,54 @@ export function Logos() {
   };
 
   const handleLogoUpload = () => {
-    if (!selectedLogo || !file) {
-      toast.error("Please select a file to upload");
+    if (!selectedLogo) {
+      toast.error("Please select a logo position");
       return;
     }
     
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      if (event.target && event.target.result) {
-        const updatedLogos = logos.map(logo => 
-          logo.id === selectedLogo 
-            ? { 
-                ...logo, 
-                src: event.target!.result as string, 
-                alt: newAlt || logo.alt, 
-                isPlaceholder: false 
-              } 
-            : logo
-        );
-        
-        setLogos(updatedLogos);
-        localStorage.setItem('companyLogos', JSON.stringify(updatedLogos));
-        
-        setFile(null);
-        setPreviewSrc("");
-        setIsDialogOpen(false);
-        toast.success("Logo updated successfully!");
-      }
-    };
-    reader.readAsDataURL(file);
+    if (file) {
+      // Using file
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target && event.target.result) {
+          updateLogo(selectedLogo, event.target.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    } else if (previewSrc) {
+      // Using existing preview
+      updateLogo(selectedLogo, previewSrc);
+    } else {
+      toast.error("Please select a file to upload");
+      return;
+    }
+  };
+
+  const updateLogo = (logoId: number, src: string) => {
+    const updatedLogos = logos.map(logo => 
+      logo.id === logoId 
+        ? { 
+            ...logo, 
+            src: src, 
+            alt: newAlt || logo.alt, 
+            isPlaceholder: false 
+          } 
+        : logo
+    );
+    
+    setLogos(updatedLogos);
+    setFile(null);
+    setPreviewSrc("");
+    setIsDialogOpen(false);
+    toast.success("Logo updated successfully!");
+    
+    // Ensure localStorage is updated
+    try {
+      localStorage.setItem('companyLogos', JSON.stringify(updatedLogos));
+      console.log("Logo updated and saved to localStorage");
+    } catch (error) {
+      console.error("Failed to save updated logo to localStorage:", error);
+    }
   };
 
   const openLogoDialog = (logoId: number, logoAlt: string) => {
@@ -155,7 +211,7 @@ export function Logos() {
             className="grayscale hover:grayscale-0 opacity-80 hover:opacity-100 transition-all duration-300 flex items-center justify-center h-24 md:h-32 cursor-pointer"
             onClick={() => openLogoDialog(logo.id, logo.alt)}
           >
-            {logo.isPlaceholder ? (
+            {logo.isPlaceholder || !logo.src ? (
               renderPlaceholder(logo.alt)
             ) : (
               <img 
@@ -163,9 +219,9 @@ export function Logos() {
                 alt={logo.alt} 
                 className="h-24 md:h-32 w-auto object-contain"
                 onError={(e) => {
+                  console.error(`Failed to load image for ${logo.alt}:`, logo.src);
                   const target = e.target as HTMLImageElement;
                   target.onerror = null;
-                  console.log(`Failed to load image for ${logo.alt}. Showing fallback.`);
                   // If image fails to load, mark as placeholder
                   setLogos(prev => prev.map(l => 
                     l.id === logo.id ? {...l, isPlaceholder: true} : l
@@ -225,7 +281,7 @@ export function Logos() {
               </div>
             )}
             
-            <Button onClick={handleLogoUpload} disabled={!file}>
+            <Button onClick={handleLogoUpload} disabled={!file && !previewSrc}>
               Save Logo
             </Button>
           </div>
