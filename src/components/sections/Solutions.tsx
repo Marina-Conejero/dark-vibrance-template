@@ -1,29 +1,29 @@
 
 import { Section, SectionTitle } from "../ui/Section";
 import { SolutionCard } from "../ui/SolutionCard";
-import { LineChart, BarChart3, MessageSquare, FileText, Rocket } from "lucide-react";
+import { LineChart, Users, Cog, Lightbulb, Database } from "lucide-react";
 
 export function Solutions() {
   const solutions = [{
     icon: <LineChart className="h-8 w-8" />,
-    title: "AI-Powered Investment Pipeline",
-    description: "Fully automated system that analyzes and selects promising companies for investment, enriches key contact data, and prepares outreach communications."
+    title: "Sales & Marketing",
+    description: "AI-based lead generation with 360 enrichment, content generation AI Bot, automated outreach, real-time dashboards, sales alerts, automated sales channel discovery."
   }, {
-    icon: <BarChart3 className="h-8 w-8" />,
-    title: "Automated B2B Pre-Sales Engine",
-    description: "AI-enhanced system that generates leads, qualifies prospects, and manages outreach without the need for a large sales team."
+    icon: <Users className="h-8 w-8" />,
+    title: "Customer Relationships",
+    description: "Intelligent virtual assistants, custom CRM interfaces for seamless data flow, CRM automations, sentiment analysis, loyalty triggers, auto re-engagement, AI meeting assistant."
   }, {
-    icon: <MessageSquare className="h-8 w-8" />,
-    title: "AI Meeting Assistant",
-    description: "Autonomous bot that tracks meetings, processes notes, updates CRM, and briefs team members before meetings."
+    icon: <Cog className="h-8 w-8" />,
+    title: "Operations & Efficiency",
+    description: "Automated approvals, intelligent document processing, AI workflow design, compliance checks, unified tool setups, automated report generation, AI-assisted employee onboarding."
   }, {
-    icon: <FileText className="h-8 w-8" />,
-    title: "Automated Investor Updates",
-    description: "System that aggregates updates from portfolio companies, market data, and trends to create quarterly investor reports."
+    icon: <Lightbulb className="h-8 w-8" />,
+    title: "Product & Innovation",
+    description: "LLM-based ideation, real-time feedback, rapid prototyping, multi-format data extraction, natural language to database queries, concept visualization, AI custom interfaces from Email to WhatsApp."
   }, {
-    icon: <Rocket className="h-8 w-8" />,
-    title: "AI-Enhanced Growth Flywheel",
-    description: "Integrated process for lead generation, data enrichment, and content creation, boosting growth without additional resource allocation."
+    icon: <Database className="h-8 w-8" />,
+    title: "Data & Reporting",
+    description: "No-code data pipelines, predictive forecasting, custom BI, real-time alerts, automated dashboards, anomaly detection, automated data summaries, data reformatting."
   }];
   
   return (
