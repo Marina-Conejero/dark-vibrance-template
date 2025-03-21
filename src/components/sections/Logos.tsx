@@ -182,7 +182,7 @@ export function Logos() {
           <DialogHeader>
             <DialogTitle>Upload Logo</DialogTitle>
             <DialogDescription>
-              Upload a new logo image. For best results, use a PNG with transparent background, sized at 400px × 200px (2:1 ratio).
+              Upload a new logo image. For best results, use a transparent PNG or SVG file, sized at 400px × 200px (2:1 ratio).
             </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col gap-4 py-4">
@@ -204,9 +204,12 @@ export function Logos() {
               <Input
                 id="logoFile"
                 type="file"
-                accept="image/*"
+                accept=".svg,image/svg+xml,image/png,image/jpeg,image/gif"
                 onChange={handleFileChange}
               />
+              <p className="text-xs text-muted-foreground">
+                Supported formats: SVG, PNG, JPEG, GIF
+              </p>
             </div>
             
             {previewSrc && (
