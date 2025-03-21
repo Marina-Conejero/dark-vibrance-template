@@ -7,7 +7,7 @@ export function Solutions() {
   const solutions = [{
     icon: <LineChart className="h-8 w-8" />,
     title: "Sales & Marketing",
-    description: "AI-based lead generation with 360 enrichment, content generation AI Bot, automated outreach, real-time dashboards, sales alerts, automated sales channel discovery."
+    description: "AI-based lead generation with 360 enrichment,\ncontent generation AI Bot, automated outreach,\nreal-time dashboards, sales alerts, automated sales channel discovery."
   }, {
     icon: <Users className="h-8 w-8" />,
     title: "Customer Relationships",
@@ -23,7 +23,7 @@ export function Solutions() {
   }, {
     icon: <Database className="h-8 w-8" />,
     title: "Data & Reporting",
-    description: "No-code data pipelines, predictive forecasting, custom BI, real-time alerts, automated dashboards, anomaly detection, automated data summaries, data reformatting."
+    description: "No-code data pipelines, predictive forecasting,\ncustom BI, real-time alerts, automated dashboards,\nanomaly detection, automated data summaries, data reformatting."
   }];
   
   return (
