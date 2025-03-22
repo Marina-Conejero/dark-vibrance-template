@@ -2,11 +2,8 @@
 import { Section, SectionTitle } from "../ui/Section";
 import { SolutionCard } from "../ui/SolutionCard";
 import { LineChart, Users, Cog, Lightbulb, Database } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 export function Solutions() {
-  const isMobile = useIsMobile();
-  
   const solutions = [{
     icon: <LineChart className="h-8 w-8" />,
     title: "Sales &\nMarketing",
@@ -37,27 +34,19 @@ export function Solutions() {
         description="Real-world examples of how our intelligent automation has transformed businesses across industries." 
       />
       
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
-        {solutions.map((solution, index) => {
-          // Determine if this card should be full width on mobile
-          const isMiddleCards = index > 0 && index < 4;
-          const cardClassName = isMobile && isMiddleCards 
-            ? "col-span-2" 
-            : "";
-          
-          return (
-            <SolutionCard 
-              key={index} 
-              icon={solution.icon} 
-              title={solution.title} 
-              description={solution.description} 
-              className={`animate-fade-in-up group ${cardClassName}`}
-              style={{
-                animationDelay: `${index * 0.1}s`
-              }} 
-            />
-          );
-        })}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        {solutions.map((solution, index) => (
+          <SolutionCard 
+            key={index} 
+            icon={solution.icon} 
+            title={solution.title} 
+            description={solution.description} 
+            className="animate-fade-in-up group" 
+            style={{
+              animationDelay: `${index * 0.1}s`
+            }} 
+          />
+        ))}
       </div>
     </Section>
   );
