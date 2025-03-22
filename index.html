@@ -9,6 +9,24 @@
     <meta name="author" content="Hive Mechanics" />
     <meta property="og:image" content="/og-image.png" />
     <link rel="icon" type="image/png" href="/lovable-uploads/6c91c7da-95b5-44dc-be82-f586e08d008f.png" />
+    
+    <!-- Handle SPA redirects for 404 pages -->
+    <script type="text/javascript">
+      // This script checks to see if a redirect is present in the URL
+      // and converts it back into the correct URL and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new URL.
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
   </head>
 
   <body>
