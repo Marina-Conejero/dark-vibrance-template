@@ -2,8 +2,11 @@
 import { Section, SectionTitle } from "../ui/Section";
 import { SolutionCard } from "../ui/SolutionCard";
 import { LineChart, Users, Cog, Lightbulb, Database } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function Solutions() {
+  const isMobile = useIsMobile();
+  
   const solutions = [{
     icon: <LineChart className="h-8 w-8" />,
     title: "Sales &\nMarketing",
@@ -44,7 +47,8 @@ export function Solutions() {
             className="animate-fade-in-up group" 
             style={{
               animationDelay: `${index * 0.1}s`
-            }} 
+            }}
+            isMobile={isMobile}
           />
         ))}
       </div>

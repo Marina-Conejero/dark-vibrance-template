@@ -7,9 +7,15 @@ interface SolutionCardProps {
   description: string;
   className?: string;
   style?: React.CSSProperties;
+  isMobile?: boolean;
 }
 
-export function SolutionCard({ icon, title, description, className, style }: SolutionCardProps) {
+export function SolutionCard({ icon, title, description, className, style, isMobile }: SolutionCardProps) {
+  // Convert newlines to spaces on mobile for specific cards
+  const formattedTitle = isMobile && (title.includes("Sales &") || title.includes("Data &"))
+    ? title.replace(/\n/g, ' ')
+    : title;
+    
   return (
     <div 
       className={cn(
@@ -22,7 +28,7 @@ export function SolutionCard({ icon, title, description, className, style }: Sol
         {icon}
       </div>
       <h3 className="text-xl font-semibold mb-3 text-white whitespace-pre-line">
-        {title}
+        {formattedTitle}
       </h3>
       <p className="text-gray-300 flex-grow whitespace-pre-line">
         {description}
