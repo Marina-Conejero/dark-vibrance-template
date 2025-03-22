@@ -21,7 +21,7 @@ type Logo = {
 };
 
 export function Logos() {
-  // Updated initial logos with the new uploaded ones
+  // Updated initial logos with the new uploaded ones and replacing the last logo
   const initialLogos: Logo[] = [
     {
       id: 1,
@@ -55,8 +55,8 @@ export function Logos() {
     },
     {
       id: 6,
-      src: "/lovable-uploads/52a2a068-c063-4afe-a334-8cf378e55fd9.png",
-      alt: "Nordstar",
+      src: "/lovable-uploads/fc934814-d0ce-47ab-9b09-1e5738295506.png",
+      alt: "New Logo",
       isPlaceholder: false
     }
   ];
@@ -128,7 +128,7 @@ export function Logos() {
 
   const renderPlaceholder = (alt: string) => (
     <div className="flex items-center justify-center w-full h-full">
-      <svg viewBox="0 0 100 50" className="h-10 md:h-14 w-auto">
+      <svg viewBox="0 0 100 50" className="h-8 md:h-12 w-auto">
         <text x="50" y="30" fontSize="16" fill="#fff" textAnchor="middle" fontWeight="bold">{alt}</text>
       </svg>
     </div>
@@ -225,7 +225,7 @@ export function Logos() {
         {logos.map((logo) => (
           <div 
             key={logo.id}
-            className="grayscale hover:grayscale-0 opacity-80 hover:opacity-100 transition-all duration-300 flex items-center justify-center h-16 md:h-20 cursor-pointer"
+            className="grayscale hover:grayscale-0 opacity-80 hover:opacity-100 transition-all duration-300 flex items-center justify-center h-14 md:h-16 cursor-pointer"
             onClick={() => openLogoDialog(logo.id, logo.alt)}
           >
             {logo.isPlaceholder || !logo.src ? (
@@ -234,7 +234,7 @@ export function Logos() {
               <img 
                 src={logo.src} 
                 alt={logo.alt} 
-                className="h-10 md:h-14 w-auto max-w-full object-contain"
+                className="h-8 md:h-10 w-auto max-w-full object-contain"
                 onError={(e) => {
                   console.error(`Failed to load image for ${logo.alt}:`, logo.src);
                   const target = e.target as HTMLImageElement;
