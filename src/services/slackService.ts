@@ -4,7 +4,7 @@
  */
 
 // Using the provided webhook URL
-const slackWebhookUrl = 'https://hooks.slack.com/services/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';
+const slackWebhookUrl = '';
 
 /**
  * Checks if Slack webhook is configured
