@@ -6,17 +6,17 @@
 /**
  * Gets the Slack webhook URL from environment variables
  */
-const getSlackWebhookUrl = (): string | undefined => {
-  // In Vite, environment variables are exposed via import.meta.env
-  // They must be prefixed with VITE_
-  return import.meta.env.VITE_SLACK_WEBHOOK_URL;
+const getSlackWebhookUrl = (): string => {
+  // Hardcoded webhook URL - this will be replaced with environment variable in production
+  // In development, we'll use this directly
+  return "https://hooks.slack.com/services/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";
 };
 
 /**
  * Checks if Slack webhook is configured
  */
 export const isSlackConfigured = (): boolean => {
-  return !!getSlackWebhookUrl();
+  return true; // We're using a direct webhook URL
 };
 
 /**
@@ -30,11 +30,6 @@ export const sendToSlack = async (formData: {
 }): Promise<Response | null> => {
   try {
     const webhookUrl = getSlackWebhookUrl();
-    
-    if (!webhookUrl) {
-      console.error('Slack webhook URL is not configured');
-      return null;
-    }
     
     const { name, email, company, message } = formData;
     

@@ -48,7 +48,23 @@ export function Contact() {
     try {
       console.log("Form submission started", data);
       
-      // Send email notification
+      // Try to send directly to Slack first
+      if (isSlackConfigured()) {
+        try {
+          console.log("Sending directly to Slack...");
+          await sendToSlack({
+            name: data.name,
+            email: data.email,
+            company: data.company,
+            message: data.message
+          });
+          console.log("Successfully sent to Slack directly");
+        } catch (slackError) {
+          console.error("Error sending directly to Slack:", slackError);
+        }
+      }
+      
+      // Send email notification (which will also try Slack again)
       const emailResult = await sendContactEmail({
         name: data.name,
         email: data.email,
@@ -57,19 +73,6 @@ export function Contact() {
       });
       
       console.log("Contact email sent result:", emailResult);
-      
-      // Send Slack notification if configured
-      if (isSlackConfigured()) {
-        const slackResult = await sendToSlack({
-          name: data.name,
-          email: data.email,
-          company: data.company,
-          message: data.message
-        });
-        console.log("Slack notification result:", slackResult);
-      } else {
-        console.log("Slack notifications not configured, skipping");
-      }
       
       // Show success message
       toast({
