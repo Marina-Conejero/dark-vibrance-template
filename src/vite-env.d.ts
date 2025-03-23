@@ -2,7 +2,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_SLACK_WEBHOOK_URL?: string;
+  readonly VITE_SLACK_WEBHOOK_URL: string;
 }
 
 interface ImportMeta {

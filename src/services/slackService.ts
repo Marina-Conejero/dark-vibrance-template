@@ -7,16 +7,7 @@
  * Gets the Slack webhook URL from environment variables
  */
 const getSlackWebhookUrl = (): string => {
-  // Try to get from environment variable (for production)
-  const envWebhook = import.meta.env.VITE_SLACK_WEBHOOK_URL;
-  
-  if (envWebhook) {
-    return envWebhook;
-  }
-  
-  // For development, return empty string - webhook should be set in .env.local
-  // which is not committed to the repository
-  return "";
+  return import.meta.env.VITE_SLACK_WEBHOOK_URL || '';
 };
 
 /**
