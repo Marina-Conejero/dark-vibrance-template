@@ -3,14 +3,20 @@
  * Service for sending messages to Slack using webhooks
  */
 
-// Using the provided webhook URL
-const slackWebhookUrl = 'https://hooks.slack.com/services/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';
+/**
+ * Gets the Slack webhook URL from environment variables
+ */
+const getSlackWebhookUrl = (): string | undefined => {
+  // In Vite, environment variables are exposed via import.meta.env
+  // They must be prefixed with VITE_
+  return import.meta.env.VITE_SLACK_WEBHOOK_URL;
+};
 
 /**
  * Checks if Slack webhook is configured
  */
 export const isSlackConfigured = (): boolean => {
-  return true; // Always return true since we have a hardcoded webhook URL
+  return !!getSlackWebhookUrl();
 };
 
 /**
@@ -23,6 +29,13 @@ export const sendToSlack = async (formData: {
   message: string;
 }): Promise<Response | null> => {
   try {
+    const webhookUrl = getSlackWebhookUrl();
+    
+    if (!webhookUrl) {
+      console.error('Slack webhook URL is not configured');
+      return null;
+    }
+    
     const { name, email, company, message } = formData;
     
     // Get current date and time
@@ -36,13 +49,9 @@ export const sendToSlack = async (formData: {
       text: `📬 *New Contact Form Submission* (${timestamp})\n\n*From:* ${name}\n*Email:* ${email}\n*Company:* ${company}\n\n*Message:*\n${message}`
     };
     
-    // For browser environments, we need to handle CORS
-    // Some environments might block direct requests to external services
-    // We'll use a more direct approach with simpler message format
-    
     console.log('Sending to Slack:', slackMessage);
     
-    const response = await fetch(slackWebhookUrl, {
+    const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -11,7 +11,7 @@ import { Button } from "../ui/CustomButton";
 import { toast } from "../../hooks/use-toast";
 import { Send, CheckCircle, Phone } from "lucide-react";
 import { sendContactEmail } from "@/services/emailService";
-import { isSlackConfigured } from "@/services/slackService";
+import { isSlackConfigured, sendToSlack } from "@/services/slackService";
 
 // Schema for form validation
 const contactFormSchema = z.object({
@@ -47,14 +47,29 @@ export function Contact() {
     
     try {
       console.log("Form submission started", data);
-      const result = await sendContactEmail({
+      
+      // Send email notification
+      const emailResult = await sendContactEmail({
         name: data.name,
         email: data.email,
         company: data.company,
         message: data.message
       });
       
-      console.log("Contact email sent result:", result);
+      console.log("Contact email sent result:", emailResult);
+      
+      // Send Slack notification if configured
+      if (isSlackConfigured()) {
+        const slackResult = await sendToSlack({
+          name: data.name,
+          email: data.email,
+          company: data.company,
+          message: data.message
+        });
+        console.log("Slack notification result:", slackResult);
+      } else {
+        console.log("Slack notifications not configured, skipping");
+      }
       
       // Show success message
       toast({
@@ -226,4 +241,3 @@ export function Contact() {
     </Section>
   );
 }
-

@@ -20,6 +20,12 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // Define environment variables with defaults for better DX
+  // IMPORTANT: This only provides types - actual values must be in .env files or set in the environment
+  define: {
+    // Provide fallbacks for environment variables
+    'import.meta.env.VITE_SLACK_WEBHOOK_URL': JSON.stringify(process.env.VITE_SLACK_WEBHOOK_URL || ''),
+  },
   // Add build configuration for SPA
   build: {
     outDir: "dist",
