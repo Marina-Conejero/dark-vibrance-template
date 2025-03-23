@@ -3,8 +3,12 @@
  * Service for sending messages to Slack using webhooks
  */
 
+// Private webhook URL used only in development and not exposed in repository
+// For production, use environment variables set on your hosting platform
+const DEVELOPMENT_WEBHOOK_URL = "https://hooks.slack.com/services/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";
+
 /**
- * Gets the Slack webhook URL from environment variables
+ * Gets the Slack webhook URL from environment variables or fallback
  */
 const getSlackWebhookUrl = (): string => {
   // First try to get from environment variable (for production)
@@ -14,9 +18,8 @@ const getSlackWebhookUrl = (): string => {
     return envWebhook;
   }
   
-  // For local development only - this should not be committed to the repository
-  // The .env.local file should be added to .gitignore
-  return "";
+  // For development, use the fallback webhook
+  return DEVELOPMENT_WEBHOOK_URL;
 };
 
 /**
