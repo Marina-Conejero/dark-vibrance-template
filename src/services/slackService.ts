@@ -7,16 +7,23 @@
  * Gets the Slack webhook URL from environment variables
  */
 const getSlackWebhookUrl = (): string => {
-  // Hardcoded webhook URL - this will be replaced with environment variable in production
-  // In development, we'll use this directly
-  return "https://hooks.slack.com/services/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";
+  // First try to get from environment variable (for production)
+  const envWebhook = import.meta.env.VITE_SLACK_WEBHOOK_URL;
+  
+  if (envWebhook) {
+    return envWebhook;
+  }
+  
+  // For local development only - this should not be committed to the repository
+  // The .env.local file should be added to .gitignore
+  return "";
 };
 
 /**
  * Checks if Slack webhook is configured
  */
 export const isSlackConfigured = (): boolean => {
-  return true; // We're using a direct webhook URL
+  return !!getSlackWebhookUrl();
 };
 
 /**
@@ -30,6 +37,11 @@ export const sendToSlack = async (formData: {
 }): Promise<Response | null> => {
   try {
     const webhookUrl = getSlackWebhookUrl();
+    
+    if (!webhookUrl) {
+      console.error('Slack webhook URL is not configured');
+      return null;
+    }
     
     const { name, email, company, message } = formData;
     
