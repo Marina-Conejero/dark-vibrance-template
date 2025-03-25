@@ -1,13 +1,11 @@
 
 import { Resend } from 'resend';
-import { sendToSlack, isSlackConfigured } from './slackService';
 
 // Initialize with the provided API key
 const resendInstance = new Resend('re_LdbpXztf_6VVw2yFKKyCCj3qAWnNjqQSZ');
 
 /**
  * Sends an email with the contact form data
- * If Slack is configured, also sends to Slack
  */
 export const sendContactEmail = async (formData: {
   name: string;
@@ -16,23 +14,8 @@ export const sendContactEmail = async (formData: {
   message: string;
 }) => {
   const { name, email, company, message } = formData;
-  let slackSuccess = false;
-  let emailSuccess = false;
   
-  // First, try sending to Slack as it's non-critical
-  if (isSlackConfigured()) {
-    try {
-      console.log('Attempting to send to Slack...');
-      await sendToSlack(formData);
-      slackSuccess = true;
-      console.log('Successfully sent to Slack');
-    } catch (slackError) {
-      console.error('Error sending to Slack, continuing with email:', slackError);
-      // Don't block email sending if Slack fails
-    }
-  }
-  
-  // Then send email via Resend
+  // Send email via Resend
   try {
     console.log('Sending email via Resend...');
     const emailResponse = await resendInstance.emails.send({
@@ -49,9 +32,8 @@ export const sendContactEmail = async (formData: {
       `,
     });
     
-    emailSuccess = true;
     console.log('Email sent successfully:', emailResponse);
-    return { emailSuccess, slackSuccess, emailResponse };
+    return { emailSuccess: true, emailResponse };
   } catch (error) {
     console.error('Error sending email:', error);
     throw error;
