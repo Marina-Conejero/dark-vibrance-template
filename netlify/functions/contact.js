@@ -1,27 +1,28 @@
+
 export async function handler(event, context) {
-  const webhookUrl = process.env.SLACK_WEBHOOK_URL;
+  const webhookUrl = process.env.WEBHOOK_URL || 'https://hook.eu2.make.com/ecdy4yhqu7twvvv49ph5cplxgiykrtft';
 
   const data = JSON.parse(event.body);
 
-  const message = {
-    text: `📩 New contact form submission:\n\n` +
-          `👤 Name: ${data.name}\n` +
-          `🏢 Company: ${data.company}\n` +
-          `📧 Email: ${data.email}\n` +
-          `📝 Message: ${data.message}`
+  const payload = {
+    name: data.name,
+    email: data.email,
+    company: data.company,
+    message: data.message,
+    timestamp: new Date().toISOString()
   };
 
   try {
     const res = await fetch(webhookUrl, {
       method: "POST",
-      body: JSON.stringify(message),
+      body: JSON.stringify(payload),
       headers: { "Content-Type": "application/json" }
     });
 
     if (!res.ok) {
       return {
         statusCode: res.status,
-        body: "Failed to send message to Slack"
+        body: "Failed to send message to webhook"
       };
     }
 

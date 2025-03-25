@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -11,7 +10,7 @@ import { Button } from "../ui/CustomButton";
 import { toast } from "../../hooks/use-toast";
 import { Send, CheckCircle, Phone } from "lucide-react";
 import { sendContactEmail } from "@/services/emailService";
-import { isSlackConfigured, sendToSlack } from "@/services/slackService";
+import { isWebhookConfigured, sendToWebhook } from "@/services/webhookService";
 
 // Schema for form validation
 const contactFormSchema = z.object({
@@ -48,31 +47,35 @@ export function Contact() {
     try {
       console.log("Form submission started", data);
       
-      // Try to send directly to Slack first
-      if (isSlackConfigured()) {
+      // Send to Make.com webhook
+      if (isWebhookConfigured()) {
         try {
-          console.log("Sending directly to Slack...");
-          await sendToSlack({
+          console.log("Sending to webhook...");
+          await sendToWebhook({
             name: data.name,
             email: data.email,
             company: data.company,
             message: data.message
           });
-          console.log("Successfully sent to Slack directly");
-        } catch (slackError) {
-          console.error("Error sending directly to Slack:", slackError);
+          console.log("Successfully sent to webhook");
+        } catch (webhookError) {
+          console.error("Error sending to webhook:", webhookError);
         }
       }
       
-      // Send email notification (which will also try Slack again)
-      const emailResult = await sendContactEmail({
-        name: data.name,
-        email: data.email,
-        company: data.company,
-        message: data.message
-      });
-      
-      console.log("Contact email sent result:", emailResult);
+      // Send email notification as backup
+      try {
+        const emailResult = await sendContactEmail({
+          name: data.name,
+          email: data.email,
+          company: data.company,
+          message: data.message
+        });
+        
+        console.log("Contact email sent result:", emailResult);
+      } catch (emailError) {
+        console.error("Error sending email:", emailError);
+      }
       
       // Show success message
       toast({
@@ -92,13 +95,12 @@ export function Contact() {
       toast({
         title: "Message received",
         description: "Your message was processed. We'll be in touch soon.",
-        // Still show success message - we don't want to confuse the user with technical errors
       });
       
       // Reset the form anyway
       form.reset();
       
-      // Show success state despite error (email might still have sent)
+      // Show success state despite error (webhook might still have sent)
       setIsSuccess(true);
       setTimeout(() => setIsSuccess(false), 3000);
     } finally {

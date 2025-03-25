@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => ({
   // IMPORTANT: This only provides types - actual values must be in .env files or set in the environment
   define: {
     // Provide fallbacks for environment variables
-    'import.meta.env.VITE_SLACK_WEBHOOK_URL': JSON.stringify(process.env.VITE_SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/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'),
+    'import.meta.env.VITE_WEBHOOK_URL': JSON.stringify(process.env.VITE_WEBHOOK_URL || 'https://hook.eu2.make.com/ecdy4yhqu7twvvv49ph5cplxgiykrtft'),
   },
   // Add build configuration for SPA
   build: {
