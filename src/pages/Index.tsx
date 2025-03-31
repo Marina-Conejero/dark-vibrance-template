@@ -35,14 +35,6 @@ const Index = () => {
     
     document.addEventListener('click', handleAnchorClick);
     
-    // Clear localStorage for logos to ensure fresh logo setup
-    try {
-      localStorage.removeItem('companyLogos');
-      console.log("Cleared company logos from localStorage for fresh start");
-    } catch (error) {
-      console.error("Failed to clear localStorage:", error);
-    }
-    
     return () => {
       document.removeEventListener('click', handleAnchorClick);
     };
