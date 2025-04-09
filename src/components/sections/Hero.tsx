@@ -11,11 +11,11 @@ export function Hero() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight animate-fade-in lg:text-6xl text-white">
             Grow your business without hiring with {isMobile ? (
               <span className="text-white">
-                <span className="whitespace-nowrap">No&#8209;Code, AI</span> <br />
+                <span className="whitespace-nowrap">No&#8209;Code AI</span> <br />
                 & Automation
               </span>
             ) : (
-              <span className="text-white">No-Code, AI & Automation</span>
+              <span className="text-white">No-Code AI & Automation</span>
             )}
           </h1>
           
