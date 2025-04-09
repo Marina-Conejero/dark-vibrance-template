@@ -41,7 +41,7 @@ const Index = () => {
   }, []);
   
   return (
-    <div className="relative min-h-screen bg-black">
+    <div className="relative min-h-screen bg-gradient-to-br from-[#1C0F37]/20 via-black to-[#4A1C2F]/10">
       <Background starCount={150} />
       
       <Navbar />
