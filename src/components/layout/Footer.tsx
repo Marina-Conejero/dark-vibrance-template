@@ -69,7 +69,7 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-gray-500">
-                © 2024 Hive Mechanics Ltd. 6th Floor One London Wall, London, United Kingdom, EC2Y 5EB <br />
+                © 2025 Hive Mechanics Ltd. 6th Floor One London Wall, London, United Kingdom, EC2Y 5EB <br />
                 Company number: 15950504
               </p>
             </div>
