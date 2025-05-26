@@ -113,3 +113,8 @@
     @apply absolute rounded-full;
   }
 }
+
+/* Hide Lovable badge for public view */
+#lovable-badge {
+  display: none !important;
+}
